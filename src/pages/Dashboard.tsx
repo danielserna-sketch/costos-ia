@@ -4,6 +4,8 @@ import { UsageForm } from '@/components/UsageForm'
 import { CostTable } from '@/components/CostTable'
 import { CostChart } from '@/components/CostChart'
 import { ProviderFilter } from '@/components/ProviderFilter'
+import { SummaryCards } from '@/components/SummaryCards'
+import { Header } from '@/components/Header'
 import type { Provider } from '@/types/model'
 import { providers } from '@/data/models'
 
@@ -18,24 +20,43 @@ export function Dashboard() {
   )
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
-          Tablero comparativo de costos de IA
-        </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Compara el costo estimado de los modelos de Anthropic (Claude), OpenAI
-          y Google (Gemini) según tu volumen de uso.
-        </p>
-      </header>
+    <>
+      <Header />
+      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-8">
+        <section className="flex flex-col gap-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+            Volumen de uso estimado
+          </h2>
+          <UsageForm usage={usage} onChange={setUsage} />
+        </section>
 
-      <UsageForm usage={usage} onChange={setUsage} />
+        <section className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+              Proveedores
+            </h2>
+            <ProviderFilter
+              selected={selectedProviders}
+              onChange={setSelectedProviders}
+            />
+          </div>
+          <SummaryCards results={filteredResults} />
+        </section>
 
-      <ProviderFilter selected={selectedProviders} onChange={setSelectedProviders} />
+        <section className="flex flex-col gap-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+            Costo mensual por modelo
+          </h2>
+          <CostChart results={filteredResults} />
+        </section>
 
-      <CostChart results={filteredResults} />
-
-      <CostTable results={filteredResults} />
-    </div>
+        <section className="flex flex-col gap-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+            Detalle comparativo
+          </h2>
+          <CostTable results={filteredResults} />
+        </section>
+      </div>
+    </>
   )
 }
