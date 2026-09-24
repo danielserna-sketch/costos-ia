@@ -12,7 +12,7 @@ import {
 import type { ModelCostResult } from '@/types/model'
 import { formatUsd } from '@/utils/cost'
 
-interface CostChartProps {
+interface ComparisonChartProps {
   results: ModelCostResult[]
 }
 
@@ -22,7 +22,9 @@ const providerColor: Record<string, string> = {
   Google: '#3b82f6',
 }
 
-export function CostChart({ results }: CostChartProps) {
+export function ComparisonChart({ results }: ComparisonChartProps) {
+  if (results.length === 0) return null
+
   const data = [...results]
     .sort((a, b) => a.totalCostPerMonth - b.totalCostPerMonth)
     .map((r) => ({
@@ -32,7 +34,7 @@ export function CostChart({ results }: CostChartProps) {
     }))
 
   return (
-    <div className="h-96 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div className="h-80 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 20, left: 10, bottom: 60 }}>
           <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-800" />
