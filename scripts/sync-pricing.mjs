@@ -37,15 +37,36 @@ function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1)
 }
 
+// Palabras que, aunque calcen con la forma de un id válido, no representan un
+// SKU "activo" vendible (snapshots de preview o líneas ya descontinuadas).
+const DENYLIST_WORDS = new Set(['preview', 'turbo', 'instant'])
+
+function hasDeniedWord(words) {
+  return words.some((w) => DENYLIST_WORDS.has(w))
+}
+
+// Nombres de variante que se muestran en minúscula (siguiendo la convención
+// que ya usan los proveedores en su propia documentación); cualquier otra
+// variante (codenames como sol/luna/terra/astra/cyber) se capitaliza.
+const LOWERCASE_VARIANTS = new Set(['mini', 'nano'])
+
+function formatVariant(word) {
+  return LOWERCASE_VARIANTS.has(word) ? word : capitalize(word)
+}
+
 // Cada extractor recibe el id "limpio" (sin prefijo de proveedor, ej. sin el
 // "gemini/" inicial) y, si reconoce la forma, devuelve { tier, version, name }.
 // `tier` agrupa versiones de la misma línea de producto; `version` es un array
 // de números comparable con compareVersions; `name` es el nombre para mostrar.
+// No se restringe a una lista fija de variantes (mini/nano/etc.): cualquier
+// sufijo de una sola palabra se acepta como una línea de producto propia,
+// salvo que esté en DENYLIST_WORDS.
 const EXTRACTORS = {
   anthropic: (slug) => {
-    const m = slug.match(/^claude-(opus|sonnet|haiku|fable)((?:-\d+){1,2})$/)
+    const m = slug.match(/^claude-([a-z]+)((?:-\d+){1,2})$/)
     if (!m) return null
     const [, family, versionSuffix] = m
+    if (hasDeniedWord([family])) return null
     const version = versionSuffix
       .split('-')
       .filter(Boolean)
@@ -57,37 +78,41 @@ const EXTRACTORS = {
     }
   },
   openai: (slug) => {
-    let m = slug.match(/^gpt-(\d+(?:\.\d+)?)(?:-(mini|nano))?$/)
+    let m = slug.match(/^gpt-(\d+(?:\.\d+)?)(?:-([a-z]+))?$/)
     if (m) {
-      const [, versionStr, size] = m
+      const [, versionStr, variant] = m
+      if (variant && hasDeniedWord([variant])) return null
       const version = versionStr.split('.').map(Number)
       return {
-        tier: size ? `gpt-${size}` : 'gpt',
+        tier: variant ? `gpt-${variant}` : 'gpt',
         version,
-        name: `GPT-${version.join('.')}${size ? ` ${size}` : ''}`,
+        name: `GPT-${version.join('.')}${variant ? ` ${formatVariant(variant)}` : ''}`,
       }
     }
-    m = slug.match(/^o(\d+)(?:-(mini|pro))?$/)
+    m = slug.match(/^o(\d+)(?:-([a-z]+))?$/)
     if (m) {
-      const [, versionStr, size] = m
+      const [, versionStr, variant] = m
+      if (variant && hasDeniedWord([variant])) return null
       const version = [Number(versionStr)]
       return {
-        tier: size ? `o-${size}` : 'o',
+        tier: variant ? `o-${variant}` : 'o',
         version,
-        name: `o${version[0]}${size ? `-${size}` : ''}`,
+        name: `o${version[0]}${variant ? `-${formatVariant(variant)}` : ''}`,
       }
     }
     return null
   },
   gemini: (slug) => {
-    const m = slug.match(/^gemini-(\d+(?:\.\d+)?)-(flash|pro)(-lite)?$/)
+    const m = slug.match(/^gemini-(\d+(?:\.\d+)?)-([a-z]+(?:-[a-z]+)*)$/)
     if (!m) return null
-    const [, versionStr, size, lite] = m
+    const [, versionStr, variantPath] = m
+    const words = variantPath.split('-')
+    if (hasDeniedWord(words)) return null
     const version = versionStr.split('.').map(Number)
     return {
-      tier: `${size}${lite ?? ''}`,
+      tier: variantPath,
       version,
-      name: `Gemini ${version.join('.')} ${capitalize(size)}${lite ? '-Lite' : ''}`,
+      name: `Gemini ${version.join('.')} ${words.map(capitalize).join('-')}`,
     }
   },
 }
