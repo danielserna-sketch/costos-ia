@@ -1,5 +1,6 @@
 import { useDarkMode } from '@/hooks/useDarkMode'
 import { ThemeToggle } from '@/components/ThemeToggle'
+import { generatedAt } from '@/data/models'
 
 export function Header() {
   const { isDark, toggle } = useDarkMode()
@@ -17,6 +18,17 @@ export function Header() {
             </p>
             <p className="text-xs leading-tight text-slate-500 dark:text-slate-400">
               Claude · OpenAI · Gemini
+              {generatedAt && (
+                <>
+                  {' '}
+                  · Precios actualizados:{' '}
+                  {new Date(generatedAt).toLocaleDateString('es-CO', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                </>
+              )}
             </p>
           </div>
         </div>

@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-09-24T00:19:55.183Z",
+  "models": [
+    {
+      "id": "claude-fable-5-1",
+      "provider": "Anthropic",
+      "name": "Claude Fable 5.1",
+      "inputPricePerMTokens": 10,
+      "outputPricePerMTokens": 50,
+      "contextWindow": 1000000,
+      "cachedInputPricePerMTokens": 0.25
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "provider": "Anthropic",
+      "name": "Claude Haiku 4.5",
+      "inputPricePerMTokens": 1,
+      "outputPricePerMTokens": 5,
+      "contextWindow": 200000,
+      "cachedInputPricePerMTokens": 0.1
+    },
+    {
+      "id": "claude-opus-5-5",
+      "provider": "Anthropic",
+      "name": "Claude Opus 5.5",
+      "inputPricePerMTokens": 4,
+      "outputPricePerMTokens": 20,
+      "contextWindow": 1000000,
+      "cachedInputPricePerMTokens": 0.2
+    },
+    {
+      "id": "claude-sonnet-5",
+      "provider": "Anthropic",
+      "name": "Claude Sonnet 5",
+      "inputPricePerMTokens": 2,
+      "outputPricePerMTokens": 10,
+      "contextWindow": 1000000,
+      "cachedInputPricePerMTokens": 0.2
+    },
+    {
+      "id": "gpt-5.4-mini",
+      "provider": "OpenAI",
+      "name": "GPT-5.4 mini",
+      "inputPricePerMTokens": 0.75,
+      "outputPricePerMTokens": 4.5,
+      "contextWindow": 272000,
+      "cachedInputPricePerMTokens": 0.075
+    },
+    {
+      "id": "gpt-5.4-nano",
+      "provider": "OpenAI",
+      "name": "GPT-5.4 nano",
+      "inputPricePerMTokens": 0.2,
+      "outputPricePerMTokens": 1.25,
+      "contextWindow": 272000,
+      "cachedInputPricePerMTokens": 0.02
+    },
+    {
+      "id": "gpt-5.6",
+      "provider": "OpenAI",
+      "name": "GPT-5.6",
+      "inputPricePerMTokens": 4,
+      "outputPricePerMTokens": 20,
+      "contextWindow": 922000,
+      "cachedInputPricePerMTokens": 0.4
+    },
+    {
+      "id": "o3",
+      "provider": "OpenAI",
+      "name": "o3",
+      "inputPricePerMTokens": 2,
+      "outputPricePerMTokens": 8,
+      "contextWindow": 200000,
+      "cachedInputPricePerMTokens": 0.5
+    },
+    {
+      "id": "o4-mini",
+      "provider": "OpenAI",
+      "name": "o4-mini",
+      "inputPricePerMTokens": 1.1,
+      "outputPricePerMTokens": 4.4,
+      "contextWindow": 200000,
+      "cachedInputPricePerMTokens": 0.275
+    },
+    {
+      "id": "gemini-2.5-pro",
+      "provider": "Google",
+      "name": "Gemini 2.5 Pro",
+      "inputPricePerMTokens": 1.25,
+      "outputPricePerMTokens": 10,
+      "contextWindow": 1048576,
+      "cachedInputPricePerMTokens": 0.125
+    },
+    {
+      "id": "gemini-3.5-flash-lite",
+      "provider": "Google",
+      "name": "Gemini 3.5 Flash-Lite",
+      "inputPricePerMTokens": 0.3,
+      "outputPricePerMTokens": 2.5,
+      "contextWindow": 1048576,
+      "cachedInputPricePerMTokens": 0.03
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "provider": "Google",
+      "name": "Gemini 3.8 Flash",
+      "inputPricePerMTokens": 0.75,
+      "outputPricePerMTokens": 3.75,
+      "contextWindow": 1048576,
+      "cachedInputPricePerMTokens": 0.075
+    }
+  ]
+}

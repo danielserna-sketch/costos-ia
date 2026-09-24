@@ -1,90 +1,51 @@
-import type { ModelPricing } from '@/types/model'
+import type { ModelPricing, Provider } from '@/types/model'
+import { fallbackModels } from '@/data/models.fallback'
+import generated from '@/data/models.generated.json'
+
+const VALID_PROVIDERS: readonly Provider[] = ['Anthropic', 'OpenAI', 'Google']
+
+function isModelPricing(value: unknown): value is ModelPricing {
+  if (!value || typeof value !== 'object') return false
+  const m = value as Record<string, unknown>
+  return (
+    typeof m.id === 'string' &&
+    typeof m.name === 'string' &&
+    VALID_PROVIDERS.includes(m.provider as Provider) &&
+    typeof m.inputPricePerMTokens === 'number' &&
+    typeof m.outputPricePerMTokens === 'number' &&
+    typeof m.contextWindow === 'number'
+  )
+}
+
+function loadGeneratedModels(): { models: ModelPricing[]; generatedAt: string } | null {
+  if (
+    !generated ||
+    typeof generated !== 'object' ||
+    !Array.isArray((generated as { models?: unknown }).models) ||
+    typeof (generated as { generatedAt?: unknown }).generatedAt !== 'string'
+  ) {
+    return null
+  }
+
+  const candidateModels = (generated as { models: unknown[] }).models
+  const validModels = candidateModels.filter(isModelPricing)
+  if (validModels.length === 0) return null
+
+  return {
+    models: validModels,
+    generatedAt: (generated as { generatedAt: string }).generatedAt,
+  }
+}
+
+const loaded = loadGeneratedModels()
 
 /**
- * Precios de referencia (USD por 1M tokens), tomados de las páginas públicas
- * de precios de cada proveedor. Deben revisarse periódicamente ya que cambian
- * con frecuencia.
+ * Precios de modelos (USD por 1M tokens). Se sincroniza automáticamente desde
+ * el dataset de LiteLLM vía `npm run sync-pricing` / GitHub Actions
+ * (scripts/sync-pricing.mjs -> src/data/models.generated.json). Si ese
+ * archivo no existe o queda inválido, se usa src/data/models.fallback.ts.
  */
-export const models: ModelPricing[] = [
-  {
-    id: 'claude-opus-5-5',
-    provider: 'Anthropic',
-    name: 'Claude Opus 5.5',
-    inputPricePerMTokens: 15,
-    outputPricePerMTokens: 75,
-    cachedInputPricePerMTokens: 1.5,
-    contextWindow: 200_000,
-  },
-  {
-    id: 'claude-sonnet-5',
-    provider: 'Anthropic',
-    name: 'Claude Sonnet 5',
-    inputPricePerMTokens: 3,
-    outputPricePerMTokens: 15,
-    cachedInputPricePerMTokens: 0.3,
-    contextWindow: 200_000,
-  },
-  {
-    id: 'claude-haiku-4-5',
-    provider: 'Anthropic',
-    name: 'Claude Haiku 4.5',
-    inputPricePerMTokens: 0.8,
-    outputPricePerMTokens: 4,
-    cachedInputPricePerMTokens: 0.08,
-    contextWindow: 200_000,
-  },
-  {
-    id: 'gpt-5',
-    provider: 'OpenAI',
-    name: 'GPT-5',
-    inputPricePerMTokens: 5,
-    outputPricePerMTokens: 15,
-    cachedInputPricePerMTokens: 2.5,
-    contextWindow: 128_000,
-  },
-  {
-    id: 'gpt-5-mini',
-    provider: 'OpenAI',
-    name: 'GPT-5 mini',
-    inputPricePerMTokens: 0.6,
-    outputPricePerMTokens: 2.4,
-    cachedInputPricePerMTokens: 0.3,
-    contextWindow: 128_000,
-  },
-  {
-    id: 'gpt-5-nano',
-    provider: 'OpenAI',
-    name: 'GPT-5 nano',
-    inputPricePerMTokens: 0.1,
-    outputPricePerMTokens: 0.4,
-    cachedInputPricePerMTokens: 0.05,
-    contextWindow: 128_000,
-  },
-  {
-    id: 'gemini-2-5-pro',
-    provider: 'Google',
-    name: 'Gemini 2.5 Pro',
-    inputPricePerMTokens: 1.25,
-    outputPricePerMTokens: 10,
-    contextWindow: 1_000_000,
-    notes: 'Precio para prompts <= 200K tokens; sube a 2.5/15 por encima.',
-  },
-  {
-    id: 'gemini-2-5-flash',
-    provider: 'Google',
-    name: 'Gemini 2.5 Flash',
-    inputPricePerMTokens: 0.3,
-    outputPricePerMTokens: 2.5,
-    contextWindow: 1_000_000,
-  },
-  {
-    id: 'gemini-2-5-flash-lite',
-    provider: 'Google',
-    name: 'Gemini 2.5 Flash-Lite',
-    inputPricePerMTokens: 0.1,
-    outputPricePerMTokens: 0.4,
-    contextWindow: 1_000_000,
-  },
-]
+export const models: ModelPricing[] = loaded?.models ?? fallbackModels
+export const generatedAt: string | null = loaded?.generatedAt ?? null
 
-export const providers = ['Anthropic', 'OpenAI', 'Google'] as const
+export const providers = VALID_PROVIDERS
