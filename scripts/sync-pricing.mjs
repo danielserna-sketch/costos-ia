@@ -8,7 +8,7 @@
 // fechados, nombres en código experimentales) se ignoran automáticamente. Solo
 // hay que tocar los extractores cuando un proveedor lanza una FORMA de nombre
 // nueva (ej. un tier "ultra"), no en cada cambio de precio o versión.
-import { writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 
 const LITELLM_URL =
@@ -170,7 +170,25 @@ async function main() {
   }
 
   const models = [...byProvider.Anthropic, ...byProvider.OpenAI, ...byProvider.Google]
-  const output = { generatedAt: new Date().toISOString(), models }
+
+  // Si los modelos no cambiaron respecto a la corrida anterior, se reutiliza
+  // el generatedAt viejo: así el archivo queda byte-idéntico y el workflow no
+  // genera un commit vacío solo por refrescar la fecha.
+  let generatedAt = new Date().toISOString()
+  try {
+    const previous = JSON.parse(await readFile(OUTPUT_PATH, 'utf-8'))
+    if (
+      Array.isArray(previous?.models) &&
+      JSON.stringify(previous.models) === JSON.stringify(models)
+    ) {
+      generatedAt = previous.generatedAt
+    }
+  } catch {
+    // No hay archivo previo (primera corrida) o quedó inválido: se usa la
+    // fecha actual sin problema.
+  }
+
+  const output = { generatedAt, models }
 
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n', 'utf-8')
 
