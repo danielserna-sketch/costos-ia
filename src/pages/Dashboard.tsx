@@ -8,6 +8,7 @@ import { ComparisonChart } from '@/components/ComparisonChart'
 import { ProviderFilter } from '@/components/ProviderFilter'
 import { ModelPicker } from '@/components/ModelPicker'
 import { PricingChanges } from '@/components/PricingChanges'
+import { InsightsPanel } from '@/components/InsightsPanel'
 import { Header } from '@/components/Header'
 import type { Provider } from '@/types/model'
 import { models, pricingChanges, providers } from '@/data/models'
@@ -46,17 +47,40 @@ export function Dashboard() {
         <section className="flex flex-col gap-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
-              1. Elige hasta {MAX_SELECTION} modelos para comparar
+              Volumen de uso y proveedores
             </h2>
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-slate-400 dark:text-slate-500">
-                {selectedIds.length}/{MAX_SELECTION} seleccionados
-              </span>
-              <ProviderFilter
-                selected={selectedProviders}
-                onChange={setSelectedProviders}
-              />
-            </div>
+            <ProviderFilter
+              selected={selectedProviders}
+              onChange={setSelectedProviders}
+            />
+          </div>
+          <UsageForm usage={usage} onChange={setUsage} />
+        </section>
+
+        <section className="flex flex-col gap-3">
+          <div>
+            <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+              Insights: quién compite con quién
+            </h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Los modelos se agrupan automáticamente por posicionamiento de
+              precio dentro de cada proveedor, para que veas de un vistazo
+              quién compite realmente contra quién (ej. un modelo económico
+              de un proveedor contra el económico de otro), con el costo
+              mensual estimado a tu volumen de uso.
+            </p>
+          </div>
+          <InsightsPanel models={visibleModels} usage={usage} />
+        </section>
+
+        <section className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+              Comparador manual — elige hasta {MAX_SELECTION} modelos
+            </h2>
+            <span className="text-xs text-slate-400 dark:text-slate-500">
+              {selectedIds.length}/{MAX_SELECTION} seleccionados
+            </span>
           </div>
           <ModelPicker
             models={visibleModels}
@@ -65,19 +89,6 @@ export function Dashboard() {
             onToggle={toggle}
             isFull={isFull}
           />
-        </section>
-
-        <section className="flex flex-col gap-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
-            2. Ajusta tu volumen de uso
-          </h2>
-          <UsageForm usage={usage} onChange={setUsage} />
-        </section>
-
-        <section className="flex flex-col gap-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
-            3. Comparación
-          </h2>
           {results.length >= 2 ? (
             <>
               <ComparisonTable results={results} onRemove={toggle} />
