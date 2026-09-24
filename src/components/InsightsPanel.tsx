@@ -68,8 +68,13 @@ export function InsightsPanel({ models, usage, onCompare }: InsightsPanelProps) 
 
             <div className="flex flex-col gap-3">
               {costs.map(({ model, cost }, i) => (
-                <div key={model.id} className="flex items-center gap-3">
-                  <div className="flex w-44 shrink-0 items-center gap-2 sm:w-64">
+                // Móvil: nombre y costo en una línea, barra debajo a todo el ancho.
+                // Desde sm: nombre | barra | costo en una sola fila.
+                <div
+                  key={model.id}
+                  className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1.5 sm:grid-cols-[16rem_minmax(0,1fr)_6rem]"
+                >
+                  <div className="flex min-w-0 items-center gap-2">
                     <ProviderBadge provider={model.provider} />
                     <span
                       className="truncate text-sm font-medium text-slate-700 dark:text-slate-200"
@@ -78,24 +83,22 @@ export function InsightsPanel({ models, usage, onCompare }: InsightsPanelProps) 
                       {model.name}
                     </span>
                   </div>
-                  <div className="flex flex-1 items-center gap-2">
-                    <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                      <div
-                        className={`h-full rounded-full ${
-                          i === 0 ? 'bg-emerald-500' : 'bg-slate-400 dark:bg-slate-600'
-                        }`}
-                        style={{ width: `${(cost / maxCost) * 100}%` }}
-                      />
-                    </div>
-                    <span
-                      className={`w-24 shrink-0 text-right text-sm font-semibold ${
-                        i === 0
-                          ? 'text-emerald-600 dark:text-emerald-400'
-                          : 'text-slate-700 dark:text-slate-200'
+                  <span
+                    className={`text-right text-sm font-semibold sm:order-3 ${
+                      i === 0
+                        ? 'text-emerald-600 dark:text-emerald-400'
+                        : 'text-slate-700 dark:text-slate-200'
+                    }`}
+                  >
+                    {formatUsd(cost)}
+                  </span>
+                  <div className="col-span-2 h-2.5 overflow-hidden rounded-full bg-slate-100 sm:order-2 sm:col-span-1 dark:bg-slate-800">
+                    <div
+                      className={`h-full rounded-full ${
+                        i === 0 ? 'bg-emerald-500' : 'bg-slate-400 dark:bg-slate-600'
                       }`}
-                    >
-                      {formatUsd(cost)}
-                    </span>
+                      style={{ width: `${(cost / maxCost) * 100}%` }}
+                    />
                   </div>
                 </div>
               ))}

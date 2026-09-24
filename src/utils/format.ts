@@ -8,3 +8,10 @@ export function formatContextWindow(tokens: number): string {
   }
   return `${tokens} tokens`
 }
+
+export function formatDate(value: string): string {
+  // Una fecha sin hora ("2026-09-13") se interpreta en UTC y en zonas como
+  // Colombia se mostraría como el día anterior; se ancla al mediodía local.
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T12:00:00`) : new Date(value)
+  return date.toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' })
+}
