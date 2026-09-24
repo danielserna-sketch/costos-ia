@@ -9,6 +9,9 @@ import { formatDate } from '@/utils/format'
 import { SectionTitle } from '@/components/PageHeader'
 import { TaskSelector } from '@/components/TaskSelector'
 import { ProviderBadge } from '@/components/ProviderBadge'
+import { ProviderFilter } from '@/components/ProviderFilter'
+import { CatalogTable } from '@/components/CatalogTable'
+import { MAX_SELECTION } from '@/hooks/useModelSelection'
 
 const HIGHLIGHT_CLASSES: CompetitiveClass[] = ['Flagship', 'Balanceado', 'Económico']
 
@@ -43,7 +46,16 @@ function ModelLine({ label, model, value }: { label: string; model: ModelPricing
 
 export function Home() {
   const navigate = useNavigate()
-  const { selectTask } = usePortalState()
+  const {
+    selectTask,
+    visibleModels,
+    selectedProviders,
+    setSelectedProviders,
+    classById,
+    selectedIds,
+    isSelectionFull,
+    toggleSelected,
+  } = usePortalState()
   const classes = classifyModels(models)
   const scored = models.filter((m) => m.quality?.overall).length
 
@@ -146,6 +158,33 @@ export function Home() {
             )
           })}
         </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <SectionTitle
+            title="Precios y calidad de todos los modelos"
+            subtitle="El valor actual de cada modelo activo. Ordena por cualquier columna o agrégalos al comparador."
+          />
+          <div className="flex flex-wrap items-center gap-3">
+            {selectedIds.length > 0 && (
+              <Link
+                to="/comparador"
+                className="rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-300"
+              >
+                Ver comparación ({selectedIds.length}/{MAX_SELECTION}) →
+              </Link>
+            )}
+            <ProviderFilter selected={selectedProviders} onChange={setSelectedProviders} />
+          </div>
+        </div>
+        <CatalogTable
+          models={visibleModels}
+          classById={classById}
+          selectedIds={selectedIds}
+          isSelectionFull={isSelectionFull}
+          onToggle={toggleSelected}
+        />
       </section>
     </div>
   )
