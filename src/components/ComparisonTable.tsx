@@ -15,7 +15,7 @@ interface Row {
   higherIsBetter?: boolean
 }
 
-const rows: Row[] = [
+const baseRows: Row[] = [
   { label: 'Entrada / 1M tokens', value: (r) => r.model.inputPricePerMTokens, format: formatUsd },
   { label: 'Salida / 1M tokens', value: (r) => r.model.outputPricePerMTokens, format: formatUsd },
   {
@@ -28,12 +28,47 @@ const rows: Row[] = [
   { label: 'Costo mensual estimado', value: (r) => r.totalCostPerMonth, format: formatUsd },
 ]
 
+const cacheRow: Row = {
+  label: 'Entrada en caché / 1M',
+  value: (r) => r.model.cachedInputPricePerMTokens ?? Infinity,
+  format: (n) => (n === Infinity ? '—' : formatUsd(n)),
+}
+
+function SavingsBanner({ results }: { results: ModelCostResult[] }) {
+  if (results.length < 2) return null
+  const sorted = [...results].sort((a, b) => a.totalCostPerMonth - b.totalCostPerMonth)
+  const cheapest = sorted[0]
+  const priciest = sorted[sorted.length - 1]
+  if (cheapest.totalCostPerMonth === priciest.totalCostPerMonth) return null
+
+  const pct = Math.round((1 - cheapest.totalCostPerMonth / priciest.totalCostPerMonth) * 100)
+
+  return (
+    <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300">
+      <span className="font-semibold">{cheapest.model.name}</span> te cuesta{' '}
+      <span className="font-semibold">{pct}% menos</span> al mes que{' '}
+      <span className="font-semibold">{priciest.model.name}</span> con este
+      volumen de uso ({formatUsd(cheapest.totalCostPerMonth)} vs{' '}
+      {formatUsd(priciest.totalCostPerMonth)}).
+    </div>
+  )
+}
+
 export function ComparisonTable({ results, onRemove }: ComparisonTableProps) {
   if (results.length === 0) return null
 
+  const hasCachePricing = results.some(
+    (r) => r.model.cachedInputPricePerMTokens !== undefined,
+  )
+  const rows = hasCachePricing
+    ? [...baseRows.slice(0, 2), cacheRow, ...baseRows.slice(2)]
+    : baseRows
+
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-      <table className="w-full text-left text-sm">
+    <div className="flex flex-col gap-3">
+      <SavingsBanner results={results} />
+      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <table className="w-full text-left text-sm">
         <thead className="border-b border-slate-200 dark:border-slate-800">
           <tr>
             <th className="px-4 py-3"></th>
@@ -93,7 +128,8 @@ export function ComparisonTable({ results, onRemove }: ComparisonTableProps) {
             )
           })}
         </tbody>
-      </table>
+        </table>
+      </div>
     </div>
   )
 }

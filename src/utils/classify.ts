@@ -127,3 +127,31 @@ export function classifyModels(
 
   return classes
 }
+
+/** Mapa id -> clase, útil para mostrar la categoría junto a cada modelo. */
+export function classifyModelsById(
+  models: ModelPricing[],
+): Map<string, CompetitiveClass> {
+  const classes = classifyModels(models)
+  const byId = new Map<string, CompetitiveClass>()
+  for (const cls of CLASS_ORDER) {
+    for (const model of classes[cls]) byId.set(model.id, cls)
+  }
+  return byId
+}
+
+/**
+ * El más barato de cada proveedor dentro de una clase (asume que `classModels`
+ * ya viene ordenado por precio ascendente, como lo entrega classifyModels).
+ * Sirve para armar un "vs" representativo con un clic desde los insights.
+ */
+export function representativePerProvider(classModels: ModelPricing[]): ModelPricing[] {
+  const seen = new Set<Provider>()
+  const result: ModelPricing[] = []
+  for (const model of classModels) {
+    if (seen.has(model.provider)) continue
+    seen.add(model.provider)
+    result.push(model)
+  }
+  return result
+}

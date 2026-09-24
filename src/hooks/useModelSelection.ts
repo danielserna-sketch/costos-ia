@@ -31,9 +31,14 @@ export function useModelSelection(models: ModelPricing[]) {
     })
   }
 
+  const select = (ids: string[]) => {
+    setSelectedIds(ids.slice(0, MAX_SELECTION))
+  }
+
   return {
     selectedIds,
     toggle,
+    select,
     isFull: selectedIds.length >= MAX_SELECTION,
   }
 }

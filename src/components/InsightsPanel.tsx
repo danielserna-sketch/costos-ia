@@ -1,14 +1,20 @@
 import type { ModelPricing, UsageEstimate } from '@/types/model'
-import { CLASS_DESCRIPTIONS, CLASS_ORDER, classifyModels } from '@/utils/classify'
+import {
+  CLASS_DESCRIPTIONS,
+  CLASS_ORDER,
+  classifyModels,
+  representativePerProvider,
+} from '@/utils/classify'
 import { calculateModelCost, formatUsd } from '@/utils/cost'
 import { ProviderBadge } from '@/components/ProviderBadge'
 
 interface InsightsPanelProps {
   models: ModelPricing[]
   usage: UsageEstimate
+  onCompare: (models: ModelPricing[]) => void
 }
 
-export function InsightsPanel({ models, usage }: InsightsPanelProps) {
+export function InsightsPanel({ models, usage, onCompare }: InsightsPanelProps) {
   const classes = classifyModels(models)
   const nonEmptyClasses = CLASS_ORDER.filter((cls) => classes[cls].length > 0)
 
@@ -45,10 +51,18 @@ export function InsightsPanel({ models, usage }: InsightsPanelProps) {
                   {CLASS_DESCRIPTIONS[cls]}
                 </p>
               </div>
-              {providersInClass < 2 && (
+              {providersInClass < 2 ? (
                 <span className="whitespace-nowrap rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-500/10 dark:text-amber-400">
                   Sin competencia directa todavía
                 </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => onCompare(representativePerProvider(classModels))}
+                  className="whitespace-nowrap rounded-full border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                >
+                  Comparar estos →
+                </button>
               )}
             </div>
 

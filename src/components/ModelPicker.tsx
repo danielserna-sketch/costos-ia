@@ -1,4 +1,5 @@
 import type { ModelPricing, Provider } from '@/types/model'
+import type { CompetitiveClass } from '@/utils/classify'
 import { ProviderBadge } from '@/components/ProviderBadge'
 import { formatUsd } from '@/utils/cost'
 import { formatContextWindow } from '@/utils/format'
@@ -9,6 +10,7 @@ interface ModelPickerProps {
   selectedIds: string[]
   onToggle: (id: string) => void
   isFull: boolean
+  classById: Map<string, CompetitiveClass>
 }
 
 export function ModelPicker({
@@ -17,6 +19,7 @@ export function ModelPicker({
   selectedIds,
   onToggle,
   isFull,
+  classById,
 }: ModelPickerProps) {
   const grouped = providers
     .map((provider) => ({
@@ -56,9 +59,16 @@ export function ModelPicker({
                   } ${disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'}`}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <span className="font-semibold text-slate-900 dark:text-slate-100">
-                      {model.name}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-semibold text-slate-900 dark:text-slate-100">
+                        {model.name}
+                      </span>
+                      {classById.has(model.id) && (
+                        <span className="w-fit rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                          {classById.get(model.id)}
+                        </span>
+                      )}
+                    </div>
                     <span
                       className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-xs ${
                         selected
