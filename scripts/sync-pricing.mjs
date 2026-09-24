@@ -10,6 +10,7 @@
 // nueva (ej. un tier "ultra"), no en cada cambio de precio o versión.
 import { readFile, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
+import { fetchArenaRows, matchQuality, publishDate } from './quality.mjs'
 
 const LITELLM_URL =
   'https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json'
@@ -337,6 +338,39 @@ async function main() {
 
   const models = [...byProvider.Anthropic, ...byProvider.OpenAI, ...byProvider.Google]
 
+  let previous = null
+  try {
+    previous = JSON.parse(await readFile(OUTPUT_PATH, 'utf-8'))
+  } catch {
+    // Primera corrida o archivo inválido.
+  }
+  const previousModels = Array.isArray(previous?.models) ? previous.models : []
+
+  // Calidad (LMArena). Si la descarga falla, se conservan los puntajes de la
+  // corrida anterior en vez de borrarlos: un fallo transitorio no debe
+  // quitarle la señal de calidad al front ni generar un commit.
+  let quality = previous?.quality ?? null
+  try {
+    const rows = await fetchArenaRows()
+    const scores = matchQuality(rows, models.map((m) => m.id))
+    for (const model of models) {
+      const perModel = scores.get(model.id)
+      if (perModel) model.quality = perModel
+    }
+    quality = {
+      source: 'LMArena (lmarena.ai) — CC BY 4.0',
+      publishedAt: publishDate(rows),
+    }
+    console.log(`Calidad: ${scores.size}/${models.length} modelos con puntaje de LMArena.`)
+  } catch (err) {
+    console.warn(`Aviso: no se pudo actualizar la calidad (${err.message}); se conservan los puntajes anteriores.`)
+    const previousById = new Map(previousModels.map((m) => [m.id, m]))
+    for (const model of models) {
+      const prevQuality = previousById.get(model.id)?.quality
+      if (prevQuality) model.quality = prevQuality
+    }
+  }
+
   // Si los modelos no cambiaron respecto a la corrida anterior, se reutiliza
   // el generatedAt y los `changes` viejos: así el archivo queda byte-idéntico
   // (el workflow no genera un commit vacío) y el aviso de cambios recientes
@@ -344,21 +378,19 @@ async function main() {
   // uno real.
   let generatedAt = new Date().toISOString()
   let changes = []
-  try {
-    const previous = JSON.parse(await readFile(OUTPUT_PATH, 'utf-8'))
-    const previousModels = Array.isArray(previous?.models) ? previous.models : []
-    if (JSON.stringify(previousModels) === JSON.stringify(models)) {
+  if (previous) {
+    if (
+      JSON.stringify(previousModels) === JSON.stringify(models) &&
+      JSON.stringify(previous.quality ?? null) === JSON.stringify(quality)
+    ) {
       generatedAt = previous.generatedAt
       changes = Array.isArray(previous.changes) ? previous.changes : []
     } else {
       changes = computeChanges(previousModels, models)
     }
-  } catch {
-    // No hay archivo previo (primera corrida) o quedó inválido: se usa la
-    // fecha actual y no hay cambios que reportar.
   }
 
-  const output = { generatedAt, models, changes }
+  const output = { generatedAt, quality, models, changes }
 
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n', 'utf-8')
 

@@ -1,5 +1,9 @@
 {
-  "generatedAt": "2026-09-24T02:13:56.458Z",
+  "generatedAt": "2026-09-24T03:57:51.992Z",
+  "quality": {
+    "source": "LMArena (lmarena.ai) — CC BY 4.0",
+    "publishedAt": "2026-09-13"
+  },
   "models": [
     {
       "id": "claude-fable-5-1",
@@ -9,7 +13,39 @@
       "outputPricePerMTokens": 50,
       "contextWindow": 1000000,
       "tier": "Anthropic:fable",
-      "cachedInputPricePerMTokens": 0.25
+      "cachedInputPricePerMTokens": 0.25,
+      "quality": {
+        "overall": {
+          "rating": 1508,
+          "votes": 5783,
+          "variant": "claude-fable-5.1-max"
+        },
+        "coding": {
+          "rating": 1511,
+          "votes": 1184,
+          "variant": "claude-fable-5.1-max"
+        },
+        "hard_prompts": {
+          "rating": 1522,
+          "votes": 3437,
+          "variant": "claude-fable-5.1-max"
+        },
+        "instruction_following": {
+          "rating": 1513,
+          "votes": 1773,
+          "variant": "claude-fable-5.1-max"
+        },
+        "longer_query": {
+          "rating": 1523,
+          "votes": 2413,
+          "variant": "claude-fable-5.1-max"
+        },
+        "multi_turn": {
+          "rating": 1495,
+          "votes": 807,
+          "variant": "claude-fable-5.1-max"
+        }
+      }
     },
     {
       "id": "claude-haiku-4-5",
@@ -19,7 +55,39 @@
       "outputPricePerMTokens": 5,
       "contextWindow": 200000,
       "tier": "Anthropic:haiku",
-      "cachedInputPricePerMTokens": 0.1
+      "cachedInputPricePerMTokens": 0.1,
+      "quality": {
+        "overall": {
+          "rating": 1397,
+          "votes": 129278,
+          "variant": "claude-haiku-4-5-20251001"
+        },
+        "coding": {
+          "rating": 1454,
+          "votes": 33262,
+          "variant": "claude-haiku-4-5-20251001"
+        },
+        "hard_prompts": {
+          "rating": 1421,
+          "votes": 79104,
+          "variant": "claude-haiku-4-5-20251001"
+        },
+        "instruction_following": {
+          "rating": 1415,
+          "votes": 40629,
+          "variant": "claude-haiku-4-5-20251001"
+        },
+        "longer_query": {
+          "rating": 1428,
+          "votes": 47202,
+          "variant": "claude-haiku-4-5-20251001"
+        },
+        "multi_turn": {
+          "rating": 1409,
+          "votes": 22779,
+          "variant": "claude-haiku-4-5-20251001"
+        }
+      }
     },
     {
       "id": "claude-mythos-5-1",
@@ -49,7 +117,39 @@
       "outputPricePerMTokens": 10,
       "contextWindow": 1000000,
       "tier": "Anthropic:sonnet",
-      "cachedInputPricePerMTokens": 0.2
+      "cachedInputPricePerMTokens": 0.2,
+      "quality": {
+        "overall": {
+          "rating": 1442,
+          "votes": 35301,
+          "variant": "claude-sonnet-5-high"
+        },
+        "coding": {
+          "rating": 1485,
+          "votes": 9725,
+          "variant": "claude-sonnet-5-high"
+        },
+        "hard_prompts": {
+          "rating": 1460,
+          "votes": 23409,
+          "variant": "claude-sonnet-5-high"
+        },
+        "instruction_following": {
+          "rating": 1450,
+          "votes": 12431,
+          "variant": "claude-sonnet-5-high"
+        },
+        "longer_query": {
+          "rating": 1464,
+          "votes": 16276,
+          "variant": "claude-sonnet-5-high"
+        },
+        "multi_turn": {
+          "rating": 1454,
+          "votes": 6132,
+          "variant": "claude-sonnet-5-high"
+        }
+      }
     },
     {
       "id": "gpt-5-chat",
@@ -59,7 +159,39 @@
       "outputPricePerMTokens": 10,
       "contextWindow": 128000,
       "tier": "OpenAI:gpt-chat",
-      "cachedInputPricePerMTokens": 0.125
+      "cachedInputPricePerMTokens": 0.125,
+      "quality": {
+        "overall": {
+          "rating": 1404,
+          "votes": 30957,
+          "variant": "gpt-5-chat"
+        },
+        "coding": {
+          "rating": 1399,
+          "votes": 5930,
+          "variant": "gpt-5-chat"
+        },
+        "hard_prompts": {
+          "rating": 1405,
+          "votes": 15069,
+          "variant": "gpt-5-chat"
+        },
+        "instruction_following": {
+          "rating": 1382,
+          "votes": 8127,
+          "variant": "gpt-5-chat"
+        },
+        "longer_query": {
+          "rating": 1399,
+          "votes": 6775,
+          "variant": "gpt-5-chat"
+        },
+        "multi_turn": {
+          "rating": 1426,
+          "votes": 5674,
+          "variant": "gpt-5-chat"
+        }
+      }
     },
     {
       "id": "gpt-5.4-mini",
@@ -69,7 +201,39 @@
       "outputPricePerMTokens": 4.5,
       "contextWindow": 272000,
       "tier": "OpenAI:gpt-mini",
-      "cachedInputPricePerMTokens": 0.075
+      "cachedInputPricePerMTokens": 0.075,
+      "quality": {
+        "overall": {
+          "rating": 1412,
+          "votes": 59387,
+          "variant": "gpt-5.4-mini-high"
+        },
+        "coding": {
+          "rating": 1439,
+          "votes": 16192,
+          "variant": "gpt-5.4-mini-high"
+        },
+        "hard_prompts": {
+          "rating": 1425,
+          "votes": 38889,
+          "variant": "gpt-5.4-mini-high"
+        },
+        "instruction_following": {
+          "rating": 1405,
+          "votes": 20176,
+          "variant": "gpt-5.4-mini-high"
+        },
+        "longer_query": {
+          "rating": 1408,
+          "votes": 25406,
+          "variant": "gpt-5.4-mini-high"
+        },
+        "multi_turn": {
+          "rating": 1431,
+          "votes": 11168,
+          "variant": "gpt-5.4-mini-high"
+        }
+      }
     },
     {
       "id": "gpt-5.4-nano",
@@ -79,7 +243,39 @@
       "outputPricePerMTokens": 1.25,
       "contextWindow": 272000,
       "tier": "OpenAI:gpt-nano",
-      "cachedInputPricePerMTokens": 0.02
+      "cachedInputPricePerMTokens": 0.02,
+      "quality": {
+        "overall": {
+          "rating": 1373,
+          "votes": 58424,
+          "variant": "gpt-5.4-nano-high"
+        },
+        "coding": {
+          "rating": 1404,
+          "votes": 16530,
+          "variant": "gpt-5.4-nano-high"
+        },
+        "hard_prompts": {
+          "rating": 1381,
+          "votes": 38567,
+          "variant": "gpt-5.4-nano-high"
+        },
+        "instruction_following": {
+          "rating": 1362,
+          "votes": 19974,
+          "variant": "gpt-5.4-nano-high"
+        },
+        "longer_query": {
+          "rating": 1366,
+          "votes": 25378,
+          "variant": "gpt-5.4-nano-high"
+        },
+        "multi_turn": {
+          "rating": 1382,
+          "votes": 11127,
+          "variant": "gpt-5.4-nano-high"
+        }
+      }
     },
     {
       "id": "gpt-5.6",
@@ -109,7 +305,39 @@
       "outputPricePerMTokens": 12,
       "contextWindow": 922000,
       "tier": "OpenAI:gpt-terra",
-      "cachedInputPricePerMTokens": 0.2
+      "cachedInputPricePerMTokens": 0.2,
+      "quality": {
+        "overall": {
+          "rating": 1446,
+          "votes": 28119,
+          "variant": "gpt-5.6-terra-xhigh"
+        },
+        "coding": {
+          "rating": 1485,
+          "votes": 7783,
+          "variant": "gpt-5.6-terra-xhigh"
+        },
+        "hard_prompts": {
+          "rating": 1468,
+          "votes": 18588,
+          "variant": "gpt-5.6-terra-xhigh"
+        },
+        "instruction_following": {
+          "rating": 1453,
+          "votes": 9959,
+          "variant": "gpt-5.6-terra-xhigh"
+        },
+        "longer_query": {
+          "rating": 1452,
+          "votes": 13080,
+          "variant": "gpt-5.6-terra-xhigh"
+        },
+        "multi_turn": {
+          "rating": 1453,
+          "votes": 4702,
+          "variant": "gpt-5.6-terra-xhigh"
+        }
+      }
     },
     {
       "id": "gpt-6-astra",
@@ -119,7 +347,39 @@
       "outputPricePerMTokens": 50,
       "contextWindow": 922000,
       "tier": "OpenAI:gpt-astra",
-      "cachedInputPricePerMTokens": 1
+      "cachedInputPricePerMTokens": 1,
+      "quality": {
+        "overall": {
+          "rating": 1444,
+          "votes": 2693,
+          "variant": "gpt-6-astra-max"
+        },
+        "coding": {
+          "rating": 1489,
+          "votes": 645,
+          "variant": "gpt-6-astra-max"
+        },
+        "hard_prompts": {
+          "rating": 1458,
+          "votes": 1678,
+          "variant": "gpt-6-astra-max"
+        },
+        "instruction_following": {
+          "rating": 1439,
+          "votes": 846,
+          "variant": "gpt-6-astra-max"
+        },
+        "longer_query": {
+          "rating": 1453,
+          "votes": 1177,
+          "variant": "gpt-6-astra-max"
+        },
+        "multi_turn": {
+          "rating": 1461,
+          "votes": 373,
+          "variant": "gpt-6-astra-max"
+        }
+      }
     },
     {
       "id": "gpt-6-luna",
@@ -149,7 +409,39 @@
       "outputPricePerMTokens": 8,
       "contextWindow": 200000,
       "tier": "OpenAI:o",
-      "cachedInputPricePerMTokens": 0.5
+      "cachedInputPricePerMTokens": 0.5,
+      "quality": {
+        "overall": {
+          "rating": 1410,
+          "votes": 58579,
+          "variant": "o3-2025-04-16"
+        },
+        "coding": {
+          "rating": 1408,
+          "votes": 11517,
+          "variant": "o3-2025-04-16"
+        },
+        "hard_prompts": {
+          "rating": 1402,
+          "votes": 25413,
+          "variant": "o3-2025-04-16"
+        },
+        "instruction_following": {
+          "rating": 1368,
+          "votes": 15386,
+          "variant": "o3-2025-04-16"
+        },
+        "longer_query": {
+          "rating": 1371,
+          "votes": 11459,
+          "variant": "o3-2025-04-16"
+        },
+        "multi_turn": {
+          "rating": 1405,
+          "votes": 9659,
+          "variant": "o3-2025-04-16"
+        }
+      }
     },
     {
       "id": "o4-mini",
@@ -159,7 +451,39 @@
       "outputPricePerMTokens": 4.4,
       "contextWindow": 200000,
       "tier": "OpenAI:o-mini",
-      "cachedInputPricePerMTokens": 0.275
+      "cachedInputPricePerMTokens": 0.275,
+      "quality": {
+        "overall": {
+          "rating": 1353,
+          "votes": 44639,
+          "variant": "o4-mini-2025-04-16"
+        },
+        "coding": {
+          "rating": 1369,
+          "votes": 8601,
+          "variant": "o4-mini-2025-04-16"
+        },
+        "hard_prompts": {
+          "rating": 1351,
+          "votes": 19278,
+          "variant": "o4-mini-2025-04-16"
+        },
+        "instruction_following": {
+          "rating": 1321,
+          "votes": 11803,
+          "variant": "o4-mini-2025-04-16"
+        },
+        "longer_query": {
+          "rating": 1314,
+          "votes": 8571,
+          "variant": "o4-mini-2025-04-16"
+        },
+        "multi_turn": {
+          "rating": 1349,
+          "votes": 7736,
+          "variant": "o4-mini-2025-04-16"
+        }
+      }
     },
     {
       "id": "gemini-2.5-pro",
@@ -169,7 +493,39 @@
       "outputPricePerMTokens": 10,
       "contextWindow": 1048576,
       "tier": "Google:pro",
-      "cachedInputPricePerMTokens": 0.125
+      "cachedInputPricePerMTokens": 0.125,
+      "quality": {
+        "overall": {
+          "rating": 1458,
+          "votes": 122554,
+          "variant": "gemini-2.5-pro"
+        },
+        "coding": {
+          "rating": 1452,
+          "votes": 26265,
+          "variant": "gemini-2.5-pro"
+        },
+        "hard_prompts": {
+          "rating": 1455,
+          "votes": 64149,
+          "variant": "gemini-2.5-pro"
+        },
+        "instruction_following": {
+          "rating": 1437,
+          "votes": 34174,
+          "variant": "gemini-2.5-pro"
+        },
+        "longer_query": {
+          "rating": 1449,
+          "votes": 32764,
+          "variant": "gemini-2.5-pro"
+        },
+        "multi_turn": {
+          "rating": 1453,
+          "votes": 20747,
+          "variant": "gemini-2.5-pro"
+        }
+      }
     },
     {
       "id": "gemini-3.5-flash-lite",
@@ -179,7 +535,39 @@
       "outputPricePerMTokens": 2.5,
       "contextWindow": 1048576,
       "tier": "Google:flash-lite",
-      "cachedInputPricePerMTokens": 0.03
+      "cachedInputPricePerMTokens": 0.03,
+      "quality": {
+        "overall": {
+          "rating": 1436,
+          "votes": 26165,
+          "variant": "gemini-3.5-flash-lite"
+        },
+        "coding": {
+          "rating": 1456,
+          "votes": 7325,
+          "variant": "gemini-3.5-flash-lite"
+        },
+        "hard_prompts": {
+          "rating": 1441,
+          "votes": 17512,
+          "variant": "gemini-3.5-flash-lite"
+        },
+        "instruction_following": {
+          "rating": 1419,
+          "votes": 9372,
+          "variant": "gemini-3.5-flash-lite"
+        },
+        "longer_query": {
+          "rating": 1435,
+          "votes": 12487,
+          "variant": "gemini-3.5-flash-lite"
+        },
+        "multi_turn": {
+          "rating": 1442,
+          "votes": 4360,
+          "variant": "gemini-3.5-flash-lite"
+        }
+      }
     },
     {
       "id": "gemini-3.8-flash",
@@ -189,7 +577,39 @@
       "outputPricePerMTokens": 3.75,
       "contextWindow": 1048576,
       "tier": "Google:flash",
-      "cachedInputPricePerMTokens": 0.075
+      "cachedInputPricePerMTokens": 0.075,
+      "quality": {
+        "overall": {
+          "rating": 1495,
+          "votes": 5076,
+          "variant": "gemini-3.8-flash-high"
+        },
+        "coding": {
+          "rating": 1514,
+          "votes": 1434,
+          "variant": "gemini-3.8-flash-high"
+        },
+        "hard_prompts": {
+          "rating": 1508,
+          "votes": 3426,
+          "variant": "gemini-3.8-flash-high"
+        },
+        "instruction_following": {
+          "rating": 1493,
+          "votes": 1804,
+          "variant": "gemini-3.8-flash-high"
+        },
+        "longer_query": {
+          "rating": 1506,
+          "votes": 2538,
+          "variant": "gemini-3.8-flash-high"
+        },
+        "multi_turn": {
+          "rating": 1510,
+          "votes": 784,
+          "variant": "gemini-3.8-flash-high"
+        }
+      }
     }
   ],
   "changes": []

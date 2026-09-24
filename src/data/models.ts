@@ -1,4 +1,4 @@
-import type { ModelPricing, PricingChange, Provider } from '@/types/model'
+import type { ModelPricing, PricingChange, Provider, QualityMeta } from '@/types/model'
 import { fallbackModels } from '@/data/models.fallback'
 import generated from '@/data/models.generated.json'
 
@@ -74,5 +74,15 @@ const loaded = loadGeneratedModels()
 export const models: ModelPricing[] = loaded?.models ?? fallbackModels
 export const generatedAt: string | null = loaded?.generatedAt ?? null
 export const pricingChanges: PricingChange[] = loaded?.changes ?? []
+
+function loadQualityMeta(): QualityMeta | null {
+  const q = (generated as { quality?: unknown }).quality
+  if (!q || typeof q !== 'object') return null
+  const { source, publishedAt } = q as Record<string, unknown>
+  if (typeof source !== 'string') return null
+  return { source, publishedAt: typeof publishedAt === 'string' ? publishedAt : null }
+}
+
+export const qualityMeta: QualityMeta | null = loaded ? loadQualityMeta() : null
 
 export const providers = VALID_PROVIDERS

@@ -1,12 +1,14 @@
-import type { ModelCostResult } from '@/types/model'
+import type { ModelCostResult, QualityCategory } from '@/types/model'
 import { formatUsd } from '@/utils/cost'
 import { formatContextWindow } from '@/utils/format'
+import { QUALITY_CATEGORY_LABELS, qualityFor } from '@/utils/quality'
 import { ProviderBadge } from '@/components/ProviderBadge'
 
 interface ComparisonTableProps {
   results: ModelCostResult[]
   onRemove: (id: string) => void
   baseline: ModelCostResult | null
+  qualityCategory: QualityCategory
 }
 
 function BaselineDelta({ result, baseline }: { result: ModelCostResult; baseline: ModelCostResult }) {
@@ -74,15 +76,29 @@ function SavingsBanner({ results }: { results: ModelCostResult[] }) {
   )
 }
 
-export function ComparisonTable({ results, onRemove, baseline }: ComparisonTableProps) {
+export function ComparisonTable({
+  results,
+  onRemove,
+  baseline,
+  qualityCategory,
+}: ComparisonTableProps) {
   if (results.length === 0) return null
 
   const hasCachePricing = results.some(
     (r) => r.model.cachedInputPricePerMTokens !== undefined,
   )
-  const rows = hasCachePricing
-    ? [...baseRows.slice(0, 2), cacheRow, ...baseRows.slice(2)]
-    : baseRows
+  const qualityRow: Row = {
+    label: `Calidad (${QUALITY_CATEGORY_LABELS[qualityCategory]})`,
+    value: (r) => qualityFor(r.model, qualityCategory)?.rating ?? -Infinity,
+    format: (n) => (n === -Infinity ? 'Sin puntaje' : String(n)),
+    higherIsBetter: true,
+  }
+  const rows = [
+    qualityRow,
+    ...baseRows.slice(0, 2),
+    ...(hasCachePricing ? [cacheRow] : []),
+    ...baseRows.slice(2),
+  ]
 
   return (
     <div className="flex flex-col gap-3">

@@ -1,8 +1,9 @@
-import type { ModelPricing, Provider } from '@/types/model'
+import type { ModelPricing, Provider, QualityCategory } from '@/types/model'
 import type { CompetitiveClass } from '@/utils/classify'
 import { ProviderBadge } from '@/components/ProviderBadge'
 import { formatUsd } from '@/utils/cost'
 import { formatContextWindow } from '@/utils/format'
+import { qualityFor } from '@/utils/quality'
 
 interface ModelPickerProps {
   models: ModelPricing[]
@@ -11,6 +12,7 @@ interface ModelPickerProps {
   onToggle: (id: string) => void
   isFull: boolean
   classById: Map<string, CompetitiveClass>
+  qualityCategory: QualityCategory
 }
 
 export function ModelPicker({
@@ -20,6 +22,7 @@ export function ModelPicker({
   onToggle,
   isFull,
   classById,
+  qualityCategory,
 }: ModelPickerProps) {
   const grouped = providers
     .map((provider) => ({
@@ -83,6 +86,9 @@ export function ModelPicker({
                     <span>{formatUsd(model.inputPricePerMTokens)} entrada</span>
                     <span>{formatUsd(model.outputPricePerMTokens)} salida</span>
                     <span>{formatContextWindow(model.contextWindow)}</span>
+                    <span>
+                      Calidad {qualityFor(model, qualityCategory)?.rating ?? '—'}
+                    </span>
                   </div>
                 </button>
               )

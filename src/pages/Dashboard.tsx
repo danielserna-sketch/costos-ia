@@ -3,7 +3,8 @@ import { useUsage } from '@/hooks/useUsage'
 import { useModelSelection, pickModels, MAX_SELECTION } from '@/hooks/useModelSelection'
 import { calculateModelCost } from '@/utils/cost'
 import { classifyModelsById } from '@/utils/classify'
-import { recommend } from '@/utils/recommend'
+import { recommend, type Strategy } from '@/utils/recommend'
+import { QUALITY_CATEGORY_LABELS } from '@/utils/quality'
 import { UsageForm } from '@/components/UsageForm'
 import { ComparisonTable } from '@/components/ComparisonTable'
 import { ComparisonChart } from '@/components/ComparisonChart'
@@ -14,9 +15,10 @@ import { InsightsPanel } from '@/components/InsightsPanel'
 import { TaskSelector } from '@/components/TaskSelector'
 import { BaselineSelect } from '@/components/BaselineSelect'
 import { RecommendationCard } from '@/components/RecommendationCard'
+import { CostQualityChart } from '@/components/CostQualityChart'
 import { Header } from '@/components/Header'
 import type { ModelPricing, Provider } from '@/types/model'
-import { models, pricingChanges, providers } from '@/data/models'
+import { models, pricingChanges, providers, qualityMeta } from '@/data/models'
 import { DEFAULT_TASK, tasks, type TaskPreset } from '@/data/tasks'
 
 function StepHeading({ step, title, subtitle }: { step: number; title: string; subtitle: string }) {
@@ -37,6 +39,7 @@ export function Dashboard() {
   const [task, setTask] = useState<TaskPreset>(DEFAULT_TASK)
   const { usage, setUsage } = useUsage(DEFAULT_TASK.usage)
   const [baselineId, setBaselineId] = useState<string | null>(null)
+  const [strategy, setStrategy] = useState<Strategy>('balance')
   const [selectedProviders, setSelectedProviders] = useState<Provider[]>([
     ...providers,
   ])
@@ -53,8 +56,8 @@ export function Dashboard() {
   const classById = useMemo(() => classifyModelsById(models), [])
 
   const recommendation = useMemo(
-    () => recommend(visibleModels, task, usage),
-    [visibleModels, task, usage],
+    () => recommend(visibleModels, task, usage, strategy),
+    [visibleModels, task, usage, strategy],
   )
 
   const baselineModel = models.find((m) => m.id === baselineId) ?? null
@@ -120,15 +123,30 @@ export function Dashboard() {
           <StepHeading
             step={2}
             title="Recomendación"
-            subtitle="El modelo más costo-eficiente para tu tarea, y cómo se compara con lo que usas hoy."
+            subtitle="El modelo más costo-eficiente para tu tarea según costo y calidad, y cómo se compara con lo que usas hoy."
           />
           <RecommendationCard
             task={task}
+            strategy={strategy}
+            onStrategyChange={setStrategy}
             recommendation={recommendation}
             baseline={baseline}
             baselineClassAllowed={baselineClassAllowed}
+            qualityMeta={qualityMeta}
             onCompare={handleCompare}
           />
+          {recommendation && (
+            <CostQualityChart
+              eligible={recommendation.eligible}
+              recommendedId={recommendation.best.model.id}
+              labeledIds={[
+                recommendation.best.model.id,
+                ...recommendation.alternatives.map((a) => a.model.id),
+                ...(baselineId ? [baselineId] : []),
+              ]}
+              categoryLabel={QUALITY_CATEGORY_LABELS[task.qualityCategory]}
+            />
+          )}
         </section>
 
         <section ref={comparatorRef} className="flex scroll-mt-4 flex-col gap-4">
@@ -149,10 +167,16 @@ export function Dashboard() {
             onToggle={toggle}
             isFull={isFull}
             classById={classById}
+            qualityCategory={task.qualityCategory}
           />
           {results.length >= 2 ? (
             <>
-              <ComparisonTable results={results} onRemove={toggle} baseline={baseline} />
+              <ComparisonTable
+                results={results}
+                onRemove={toggle}
+                baseline={baseline}
+                qualityCategory={task.qualityCategory}
+              />
               <ComparisonChart results={results} />
             </>
           ) : (

@@ -1,5 +1,27 @@
 export type Provider = 'Anthropic' | 'OpenAI' | 'Google'
 
+/** Categorías del leaderboard de LMArena que usamos como señal de calidad. */
+export type QualityCategory =
+  | 'overall'
+  | 'coding'
+  | 'hard_prompts'
+  | 'longer_query'
+  | 'multi_turn'
+  | 'instruction_following'
+
+export interface QualityScore {
+  /** Arena Score (escala Elo): 100 puntos de diferencia ≈ 64% de preferencia. */
+  rating: number
+  votes: number
+  /** Nombre exacto en LMArena (puede incluir el nivel de esfuerzo, ej. "-high"). */
+  variant: string
+}
+
+export interface QualityMeta {
+  source: string
+  publishedAt: string | null
+}
+
 export interface ModelPricing {
   id: string
   provider: Provider
@@ -15,6 +37,7 @@ export interface ModelPricing {
   /** Clave de línea de producto (ej. "opus", "flash-lite") usada para
    * detectar cambios de precio entre versiones. Solo la fija sync-pricing. */
   tier?: string
+  quality?: Partial<Record<QualityCategory, QualityScore>>
 }
 
 export interface PricingChange {
