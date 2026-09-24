@@ -1,4 +1,4 @@
-import type { ModelPricing, Provider } from '@/types/model'
+import type { ModelPricing, PricingChange, Provider } from '@/types/model'
 import { fallbackModels } from '@/data/models.fallback'
 import generated from '@/data/models.generated.json'
 
@@ -17,7 +17,27 @@ function isModelPricing(value: unknown): value is ModelPricing {
   )
 }
 
-function loadGeneratedModels(): { models: ModelPricing[]; generatedAt: string } | null {
+function isPricingChange(value: unknown): value is PricingChange {
+  if (!value || typeof value !== 'object') return false
+  const c = value as Record<string, unknown>
+  return (
+    VALID_PROVIDERS.includes(c.provider as Provider) &&
+    typeof c.oldName === 'string' &&
+    typeof c.newName === 'string' &&
+    typeof c.oldInputPricePerMTokens === 'number' &&
+    typeof c.newInputPricePerMTokens === 'number' &&
+    typeof c.oldOutputPricePerMTokens === 'number' &&
+    typeof c.newOutputPricePerMTokens === 'number'
+  )
+}
+
+interface LoadedGenerated {
+  models: ModelPricing[]
+  generatedAt: string
+  changes: PricingChange[]
+}
+
+function loadGeneratedModels(): LoadedGenerated | null {
   if (
     !generated ||
     typeof generated !== 'object' ||
@@ -31,9 +51,15 @@ function loadGeneratedModels(): { models: ModelPricing[]; generatedAt: string } 
   const validModels = candidateModels.filter(isModelPricing)
   if (validModels.length === 0) return null
 
+  const candidateChanges = (generated as { changes?: unknown[] }).changes
+  const validChanges = Array.isArray(candidateChanges)
+    ? candidateChanges.filter(isPricingChange)
+    : []
+
   return {
     models: validModels,
     generatedAt: (generated as { generatedAt: string }).generatedAt,
+    changes: validChanges,
   }
 }
 
@@ -47,5 +73,6 @@ const loaded = loadGeneratedModels()
  */
 export const models: ModelPricing[] = loaded?.models ?? fallbackModels
 export const generatedAt: string | null = loaded?.generatedAt ?? null
+export const pricingChanges: PricingChange[] = loaded?.changes ?? []
 
 export const providers = VALID_PROVIDERS

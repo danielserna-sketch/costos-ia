@@ -12,6 +12,19 @@ export interface ModelPricing {
   cachedInputPricePerMTokens?: number
   contextWindow: number
   notes?: string
+  /** Clave de línea de producto (ej. "opus", "flash-lite") usada para
+   * detectar cambios de precio entre versiones. Solo la fija sync-pricing. */
+  tier?: string
+}
+
+export interface PricingChange {
+  provider: Provider
+  oldName: string
+  newName: string
+  oldInputPricePerMTokens: number
+  newInputPricePerMTokens: number
+  oldOutputPricePerMTokens: number
+  newOutputPricePerMTokens: number
 }
 
 export interface UsageEstimate {

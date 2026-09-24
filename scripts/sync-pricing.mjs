@@ -215,6 +215,40 @@ function confirmedOnPage(tier, pageText) {
   return tier.split('-').every((word) => pageText.includes(word))
 }
 
+// Detecta sucesiones de versión con cambio de precio dentro de la misma
+// línea de producto (mismo `tier`, `id` distinto), comparando contra el
+// snapshot anterior. Se usa para mostrar un aviso tipo "GPT-5.6 Sol -> GPT-6
+// Sol, 50% más barato" en el front.
+function computeChanges(previousModels, currentModels) {
+  const previousByTier = new Map(
+    previousModels.filter((m) => m.tier).map((m) => [m.tier, m]),
+  )
+
+  const changes = []
+  for (const model of currentModels) {
+    if (!model.tier) continue
+    const prev = previousByTier.get(model.tier)
+    if (!prev || prev.id === model.id) continue
+    if (
+      prev.inputPricePerMTokens === model.inputPricePerMTokens &&
+      prev.outputPricePerMTokens === model.outputPricePerMTokens
+    ) {
+      continue
+    }
+
+    changes.push({
+      provider: model.provider,
+      oldName: prev.name,
+      newName: model.name,
+      oldInputPricePerMTokens: prev.inputPricePerMTokens,
+      newInputPricePerMTokens: model.inputPricePerMTokens,
+      oldOutputPricePerMTokens: prev.outputPricePerMTokens,
+      newOutputPricePerMTokens: model.outputPricePerMTokens,
+    })
+  }
+  return changes
+}
+
 async function main() {
   const res = await fetch(LITELLM_URL)
   if (!res.ok) {
@@ -273,7 +307,7 @@ async function main() {
   const byProvider = { Anthropic: [], OpenAI: [], Google: [] }
 
   for (const [provider, tierMap] of Object.entries(winners)) {
-    for (const { slug, entry, match } of tierMap.values()) {
+    for (const [tier, { slug, entry, match }] of tierMap) {
       const model = {
         id: slug,
         provider,
@@ -281,6 +315,7 @@ async function main() {
         inputPricePerMTokens: round(entry.input_cost_per_token * 1_000_000),
         outputPricePerMTokens: round(entry.output_cost_per_token * 1_000_000),
         contextWindow: entry.max_input_tokens ?? entry.max_tokens ?? 0,
+        tier: `${provider}:${tier}`,
       }
       if (entry.cache_read_input_token_cost != null) {
         model.cachedInputPricePerMTokens = round(
@@ -303,23 +338,27 @@ async function main() {
   const models = [...byProvider.Anthropic, ...byProvider.OpenAI, ...byProvider.Google]
 
   // Si los modelos no cambiaron respecto a la corrida anterior, se reutiliza
-  // el generatedAt viejo: así el archivo queda byte-idéntico y el workflow no
-  // genera un commit vacío solo por refrescar la fecha.
+  // el generatedAt y los `changes` viejos: así el archivo queda byte-idéntico
+  // (el workflow no genera un commit vacío) y el aviso de cambios recientes
+  // no desaparece del front en la primera corrida sin novedades después de
+  // uno real.
   let generatedAt = new Date().toISOString()
+  let changes = []
   try {
     const previous = JSON.parse(await readFile(OUTPUT_PATH, 'utf-8'))
-    if (
-      Array.isArray(previous?.models) &&
-      JSON.stringify(previous.models) === JSON.stringify(models)
-    ) {
+    const previousModels = Array.isArray(previous?.models) ? previous.models : []
+    if (JSON.stringify(previousModels) === JSON.stringify(models)) {
       generatedAt = previous.generatedAt
+      changes = Array.isArray(previous.changes) ? previous.changes : []
+    } else {
+      changes = computeChanges(previousModels, models)
     }
   } catch {
     // No hay archivo previo (primera corrida) o quedó inválido: se usa la
-    // fecha actual sin problema.
+    // fecha actual y no hay cambios que reportar.
   }
 
-  const output = { generatedAt, models }
+  const output = { generatedAt, models, changes }
 
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n', 'utf-8')
 
