@@ -126,6 +126,95 @@ function stripProviderPrefix(id) {
   return id.includes('/') ? id.split('/').pop() : id
 }
 
+// Validación cruzada con la página oficial de precios de cada proveedor.
+// OpenAI queda afuera a propósito: su página bloquea requests automatizados
+// con un challenge anti-bot (Cloudflare) y no vamos a intentar evadir eso —
+// para OpenAI seguimos confiando solo en los EXTRACTORS de arriba.
+//
+// `anchors` son nombres de tier bien establecidos que deberían aparecer
+// siempre en la página si el scraping realmente está viendo el contenido
+// real; si ni siquiera esos aparecen, asumimos que el scraping falló
+// (cambio de layout, bloqueo, etc.) y NO filtramos nada esa corrida — mejor
+// dejar pasar un modelo dudoso que borrar el catálogo entero por un scraper
+// roto.
+const VALIDATION = {
+  Anthropic: {
+    url: 'https://www.anthropic.com/pricing',
+    anchors: ['opus', 'sonnet', 'haiku'],
+    scrape: scrapeWithBrowser,
+  },
+  Google: {
+    url: 'https://ai.google.dev/gemini-api/docs/pricing',
+    anchors: ['flash', 'pro'],
+    scrape: scrapeWithFetch,
+  },
+}
+
+function htmlToText(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .toLowerCase()
+}
+
+async function scrapeWithFetch(url) {
+  const res = await fetch(url)
+  if (!res.ok) return null
+  return htmlToText(await res.text())
+}
+
+async function scrapeWithBrowser(url) {
+  let chromium
+  try {
+    ;({ chromium } = await import('playwright'))
+  } catch {
+    return null // playwright no instalado en este entorno; se omite validación
+  }
+  const browser = await chromium.launch()
+  try {
+    const page = await browser.newPage()
+    await page.goto(url, { waitUntil: 'networkidle', timeout: 30_000 })
+    return (await page.innerText('body')).toLowerCase()
+  } finally {
+    await browser.close()
+  }
+}
+
+async function fetchOfficialPageText(provider) {
+  const config = VALIDATION[provider]
+  if (!config) return null
+
+  try {
+    const text = await config.scrape(config.url)
+    if (!text) return null
+
+    const confident = config.anchors.every((a) => text.includes(a))
+    if (!confident) {
+      console.warn(
+        `Aviso: no se pudo confirmar contenido real en la página de ${provider} (¿cambió el layout?) — se omite la validación cruzada para este proveedor en esta corrida.`,
+      )
+      return null
+    }
+    return text
+  } catch (err) {
+    console.warn(
+      `Aviso: scraping de ${provider} falló (${err.message}) — se omite la validación cruzada para este proveedor en esta corrida.`,
+    )
+    return null
+  }
+}
+
+// Un tier se confirma si TODAS sus palabras (ej. "flash-lite" -> flash, lite)
+// aparecen en el texto de la página oficial. No se exige que coincida el
+// número de versión exacto: las páginas de marketing no siempre listan cada
+// versión menor, así que eso generaría falsos negativos.
+function confirmedOnPage(tier, pageText) {
+  return tier.split('-').every((word) => pageText.includes(word))
+}
+
 async function main() {
   const res = await fetch(LITELLM_URL)
   if (!res.ok) {
@@ -162,6 +251,23 @@ async function main() {
     }
 
     winners[provider].set(match.tier, { slug, entry, match })
+  }
+
+  // Validación cruzada contra la página oficial de cada proveedor (ver
+  // fetchOfficialPageText arriba). Descarta candidatos cuyo tier no aparezca
+  // en la página real, solo cuando el scraping de esa página fue confiable.
+  for (const provider of ['Anthropic', 'Google']) {
+    const pageText = await fetchOfficialPageText(provider)
+    if (!pageText) continue
+
+    for (const [tier, candidate] of winners[provider]) {
+      if (!confirmedOnPage(tier, pageText)) {
+        console.warn(
+          `Descartado ${provider}/${candidate.slug} (${candidate.match.name}): "${tier}" no aparece en la página oficial de precios.`,
+        )
+        winners[provider].delete(tier)
+      }
+    }
   }
 
   const byProvider = { Anthropic: [], OpenAI: [], Google: [] }
