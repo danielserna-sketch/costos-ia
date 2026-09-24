@@ -6,6 +6,26 @@ import { ProviderBadge } from '@/components/ProviderBadge'
 interface ComparisonTableProps {
   results: ModelCostResult[]
   onRemove: (id: string) => void
+  baseline: ModelCostResult | null
+}
+
+function BaselineDelta({ result, baseline }: { result: ModelCostResult; baseline: ModelCostResult }) {
+  if (result.model.id === baseline.model.id) {
+    return <span className="text-slate-400 dark:text-slate-500">Tu modelo</span>
+  }
+  const diff = result.totalCostPerMonth - baseline.totalCostPerMonth
+  if (diff === 0) return <span className="text-slate-500 dark:text-slate-400">Igual</span>
+  const cheaper = diff < 0
+  return (
+    <span
+      className={
+        cheaper ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'
+      }
+    >
+      {cheaper ? '−' : '+'}
+      {formatUsd(Math.abs(diff))}/mes
+    </span>
+  )
 }
 
 interface Row {
@@ -54,7 +74,7 @@ function SavingsBanner({ results }: { results: ModelCostResult[] }) {
   )
 }
 
-export function ComparisonTable({ results, onRemove }: ComparisonTableProps) {
+export function ComparisonTable({ results, onRemove, baseline }: ComparisonTableProps) {
   if (results.length === 0) return null
 
   const hasCachePricing = results.some(
@@ -76,7 +96,14 @@ export function ComparisonTable({ results, onRemove }: ComparisonTableProps) {
               <th key={r.model.id} className="min-w-[170px] px-4 py-3 align-top">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex flex-col gap-1.5">
-                    <ProviderBadge provider={r.model.provider} />
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <ProviderBadge provider={r.model.provider} />
+                      {baseline?.model.id === r.model.id && (
+                        <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white dark:bg-slate-100 dark:text-slate-900">
+                          Tu modelo
+                        </span>
+                      )}
+                    </div>
                     <span className="font-semibold text-slate-900 dark:text-slate-100">
                       {r.model.name}
                     </span>
@@ -127,6 +154,18 @@ export function ComparisonTable({ results, onRemove }: ComparisonTableProps) {
               </tr>
             )
           })}
+          {baseline && (
+            <tr className="bg-slate-50 dark:bg-slate-800/50">
+              <td className="whitespace-nowrap px-4 py-3 text-slate-500 dark:text-slate-400">
+                Vs. tu modelo actual
+              </td>
+              {results.map((r) => (
+                <td key={r.model.id} className="px-4 py-3 font-medium">
+                  <BaselineDelta result={r} baseline={baseline} />
+                </td>
+              ))}
+            </tr>
+          )}
         </tbody>
         </table>
       </div>

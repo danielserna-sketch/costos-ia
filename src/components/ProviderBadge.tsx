@@ -9,7 +9,7 @@ const styles: Record<Provider, string> = {
 export function ProviderBadge({ provider }: { provider: Provider }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${styles[provider]}`}
+      className={`inline-flex w-fit shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-medium ${styles[provider]}`}
     >
       {provider}
     </span>
