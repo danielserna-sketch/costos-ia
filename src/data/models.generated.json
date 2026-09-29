@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T10:47:02.684Z",
+  "generatedAt": "2026-09-29T12:05:31.390Z",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
     "publishedAt": "2026-09-25"
@@ -142,46 +142,14 @@
       }
     },
     {
-      "id": "claude-sonnet-5",
+      "id": "claude-sonnet-5-5",
       "provider": "Anthropic",
-      "name": "Claude Sonnet 5",
+      "name": "Claude Sonnet 5.5",
       "inputPricePerMTokens": 2,
       "outputPricePerMTokens": 10,
       "contextWindow": 1000000,
       "tier": "Anthropic:sonnet",
-      "cachedInputPricePerMTokens": 0.2,
-      "quality": {
-        "overall": {
-          "rating": 1443,
-          "votes": 43340,
-          "variant": "claude-sonnet-5-high"
-        },
-        "coding": {
-          "rating": 1483,
-          "votes": 11904,
-          "variant": "claude-sonnet-5-high"
-        },
-        "hard_prompts": {
-          "rating": 1461,
-          "votes": 28811,
-          "variant": "claude-sonnet-5-high"
-        },
-        "instruction_following": {
-          "rating": 1453,
-          "votes": 15428,
-          "variant": "claude-sonnet-5-high"
-        },
-        "longer_query": {
-          "rating": 1464,
-          "votes": 20343,
-          "variant": "claude-sonnet-5-high"
-        },
-        "multi_turn": {
-          "rating": 1454,
-          "votes": 7443,
-          "variant": "claude-sonnet-5-high"
-        }
-      }
+      "cachedInputPricePerMTokens": 0.2
     },
     {
       "id": "gpt-5-chat",
