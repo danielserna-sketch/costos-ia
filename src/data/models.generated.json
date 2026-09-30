@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T12:05:31.390Z",
+  "generatedAt": "2026-09-30T11:53:33.470Z",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
     "publishedAt": "2026-09-25"
@@ -424,46 +424,14 @@
       }
     },
     {
-      "id": "gpt-6-sol",
+      "id": "gpt-6.1-sol",
       "provider": "OpenAI",
-      "name": "GPT-6 Sol",
+      "name": "GPT-6.1 Sol",
       "inputPricePerMTokens": 2,
       "outputPricePerMTokens": 10,
       "contextWindow": 922000,
       "tier": "OpenAI:gpt-sol",
-      "cachedInputPricePerMTokens": 0.2,
-      "quality": {
-        "overall": {
-          "rating": 1396,
-          "votes": 4773,
-          "variant": "gpt-6-sol-max"
-        },
-        "coding": {
-          "rating": 1453,
-          "votes": 1147,
-          "variant": "gpt-6-sol-max"
-        },
-        "hard_prompts": {
-          "rating": 1420,
-          "votes": 2932,
-          "variant": "gpt-6-sol-max"
-        },
-        "instruction_following": {
-          "rating": 1406,
-          "votes": 1588,
-          "variant": "gpt-6-sol-max"
-        },
-        "longer_query": {
-          "rating": 1414,
-          "votes": 2003,
-          "variant": "gpt-6-sol-max"
-        },
-        "multi_turn": {
-          "rating": 1405,
-          "votes": 700,
-          "variant": "gpt-6-sol-max"
-        }
-      }
+      "cachedInputPricePerMTokens": 0.1
     },
     {
       "id": "o3",
