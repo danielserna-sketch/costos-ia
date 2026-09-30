@@ -1,12 +1,18 @@
 export function formatContextWindow(tokens: number): string {
   if (tokens >= 1_000_000) {
-    const millions = tokens / 1_000_000
-    return `${millions % 1 === 0 ? millions : millions.toFixed(1)}M tokens`
+    // 1.048.576 (2^20) se muestra como "1M", igual que 1.000.000.
+    const millions = Number((tokens / 1_000_000).toFixed(1))
+    return `${millions}M tokens`
   }
   if (tokens >= 1_000) {
     return `${Math.round(tokens / 1_000)}K tokens`
   }
   return `${tokens} tokens`
+}
+
+/** Versión corta sin la palabra "tokens" (para chips y tarjetas). */
+export function formatTokensShort(tokens: number): string {
+  return formatContextWindow(tokens).replace(' tokens', '')
 }
 
 export function formatDate(value: string): string {

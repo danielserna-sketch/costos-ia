@@ -14,7 +14,7 @@ export function BaselineSelect({ models, providers, value, onChange }: BaselineS
       <select
         value={value ?? ''}
         onChange={(e) => onChange(e.target.value || null)}
-        className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-normal text-slate-900 outline-none focus:border-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+        className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-normal text-slate-900 focus:border-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
       >
         <option value="">Ninguno / aún no uso IA</option>
         {providers.map((provider) => (

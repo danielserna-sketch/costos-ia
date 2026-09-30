@@ -19,7 +19,11 @@ export const CLASS_DESCRIPTIONS: Record<CompetitiveClass, string> = {
 // Tiers "ancla" que definen la posición de cada proveedor en su propia
 // escalera de precios. El resto de tiers (variantes, codenames) se clasifican
 // por cercanía de precio a estas anclas.
-const ANCHOR_WORDS: Record<Provider, { Flagship: string; Balanceado: string; Económico: string }> = {
+// Proveedores sin entrada (xAI, Mistral, DeepSeek) no tienen una escalera
+// estable de nombres y se clasifican por percentil de precio.
+const ANCHOR_WORDS: Partial<
+  Record<Provider, { Flagship: string; Balanceado: string; Económico: string }>
+> = {
   Anthropic: { Flagship: 'opus', Balanceado: 'sonnet', Económico: 'haiku' },
   OpenAI: { Flagship: 'gpt', Balanceado: 'gpt-mini', Económico: 'gpt-nano' },
   Google: { Flagship: 'pro', Balanceado: 'flash', Económico: 'flash-lite' },
@@ -47,9 +51,9 @@ function classifyProviderModels(
   const anchors = ANCHOR_WORDS[provider]
   const withTiers = providerModels.every((m) => tierWord(m) !== null)
 
-  if (!withTiers) {
-    // Sin info de tier (ej. datos de respaldo): se aproxima por percentil de
-    // precio dentro del propio proveedor.
+  if (!withTiers || !anchors) {
+    // Sin info de tier (ej. datos de respaldo) o sin anclas conocidas: se
+    // aproxima por percentil de precio dentro del propio proveedor.
     const sorted = [...providerModels].sort((a, b) => priceScore(a) - priceScore(b))
     sorted.forEach((model, i) => {
       const ratio = i / Math.max(sorted.length - 1, 1)

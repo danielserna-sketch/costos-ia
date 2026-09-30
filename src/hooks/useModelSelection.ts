@@ -22,8 +22,12 @@ export function useModelSelection(models: ModelPricing[]) {
   const [selectedIds, setSelectedIds] = useState<string[]>(() =>
     defaultSelection(models),
   )
+  // false mientras siga la selección por defecto: la bandeja de comparación
+  // solo aparece cuando el usuario eligió algo.
+  const [touched, setTouched] = useState(false)
 
   const toggle = (id: string) => {
+    setTouched(true)
     setSelectedIds((prev) => {
       if (prev.includes(id)) return prev.filter((x) => x !== id)
       if (prev.length >= MAX_SELECTION) return prev
@@ -31,15 +35,25 @@ export function useModelSelection(models: ModelPricing[]) {
     })
   }
 
+  // Desde fuera del comparador, el primer clic parte de cero en vez de sumar
+  // a la selección por defecto (que el usuario nunca vio).
+  const toggleFresh = (id: string) => {
+    if (touched) toggle(id)
+    else select([id])
+  }
+
   const select = (ids: string[]) => {
+    setTouched(true)
     setSelectedIds(ids.slice(0, MAX_SELECTION))
   }
 
   return {
     selectedIds,
     toggle,
+    toggleFresh,
     select,
-    isFull: selectedIds.length >= MAX_SELECTION,
+    isFull: touched && selectedIds.length >= MAX_SELECTION,
+    touched,
   }
 }
 

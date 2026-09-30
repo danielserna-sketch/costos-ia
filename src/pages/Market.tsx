@@ -16,9 +16,8 @@ export function Market() {
     selectedProviders,
     setSelectedProviders,
     classById,
-    selectedIds,
-    isSelectionFull,
-    toggleSelected,
+    userSelectedIds: selectedIds,
+    toggleCompare,
     compare,
   } = usePortalState()
 
@@ -28,7 +27,7 @@ export function Market() {
     <>
       <PageHeader
         title="Mercado"
-        description="El estado actual de los modelos de Anthropic, OpenAI y Google: quién compite con quién, cambios de precio y el catálogo completo."
+        description="El estado actual de los modelos de todos los proveedores: quién compite con quién, cambios de precio y el catálogo completo."
         actions={
           <ProviderFilter selected={selectedProviders} onChange={setSelectedProviders} />
         }
@@ -69,8 +68,8 @@ export function Market() {
             models={visibleModels}
             classById={classById}
             selectedIds={selectedIds}
-            isSelectionFull={isSelectionFull}
-            onToggle={toggleSelected}
+            isSelectionFull={selectedIds.length >= MAX_SELECTION}
+            onToggle={toggleCompare}
           />
         </section>
       </div>

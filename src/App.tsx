@@ -1,6 +1,7 @@
 import { createHashRouter, RouterProvider } from 'react-router'
 import { Layout } from '@/components/Layout'
 import { Home } from '@/pages/Home'
+import { Models } from '@/pages/Models'
 import { Recommender } from '@/pages/Recommender'
 import { Comparator } from '@/pages/Comparator'
 import { Market } from '@/pages/Market'
@@ -13,6 +14,7 @@ const router = createHashRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: 'modelos', element: <Models /> },
       { path: 'recomendador', element: <Recommender /> },
       { path: 'comparador', element: <Comparator /> },
       { path: 'mercado', element: <Market /> },

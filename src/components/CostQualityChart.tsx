@@ -11,6 +11,8 @@ import {
 import type { Provider } from '@/types/model'
 import type { RankedModel } from '@/utils/recommend'
 import { formatUsd } from '@/utils/cost'
+import { providerColor } from '@/theme/providers'
+import { ProviderLegend } from '@/components/ProviderLegend'
 
 interface CostQualityChartProps {
   eligible: RankedModel[]
@@ -20,11 +22,6 @@ interface CostQualityChartProps {
   categoryLabel: string
 }
 
-const providerColor: Record<Provider, string> = {
-  Anthropic: '#f97316',
-  OpenAI: '#10b981',
-  Google: '#3b82f6',
-}
 
 interface Point {
   name: string
@@ -38,7 +35,7 @@ interface Point {
 function Dot(props: { cx?: number; cy?: number; payload?: Point }) {
   const { cx, cy, payload } = props
   if (cx === undefined || cy === undefined || !payload) return null
-  const color = providerColor[payload.provider]
+  const color = providerColor(payload.provider)
   return (
     <g>
       {payload.recommended && (
@@ -96,6 +93,9 @@ export function CostQualityChart({
         menos dinero. El círculo marca la recomendación; pasa el cursor por los
         demás puntos para ver cada modelo. Costo en escala logarítmica.
       </p>
+      <div className="mb-2">
+        <ProviderLegend providers={data.map((d) => d.provider)} />
+      </div>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 16, right: 110, bottom: 24, left: 8 }}>

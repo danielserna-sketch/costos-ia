@@ -1,3 +1,24 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Colores de proveedor (ver src/theme/providers.ts). Validados como paleta
+   categórica en claro y oscuro; solo cambia el paso de OpenAI en oscuro. */
+:root {
+  --provider-anthropic: #ea580c;
+  --provider-openai: #4f46e5;
+  --provider-google: #0284c7;
+  --provider-xai: #a16207;
+  --provider-mistral: #c026d3;
+  --provider-deepseek: #0891b2;
+}
+
+.dark {
+  --provider-openai: #8b5cf6;
+}
+
+/* Foco visible y consistente para teclado en todos los controles. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-sky-500);
+  outline-offset: 2px;
+}

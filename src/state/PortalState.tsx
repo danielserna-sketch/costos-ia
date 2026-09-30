@@ -26,6 +26,12 @@ interface PortalState {
   selectedIds: string[]
   toggleSelected: (id: string) => void
   isSelectionFull: boolean
+  /** true cuando la selección la armó el usuario (no la de por defecto). */
+  hasUserSelection: boolean
+  /** Selección visible fuera del comparador: vacía mientras siga la de por defecto. */
+  userSelectedIds: string[]
+  /** Agrega/quita desde el catálogo; el primer uso reemplaza la selección por defecto. */
+  toggleCompare: (id: string) => void
   /** Carga los modelos en el comparador y navega a él. */
   compare: (models: ModelPricing[]) => void
 }
@@ -39,7 +45,7 @@ export function PortalStateProvider({ children }: { children: ReactNode }) {
   const [strategy, setStrategy] = useState<Strategy>('balance')
   const [selectedProviders, setSelectedProviders] = useState<Provider[]>([...providers])
   const [baselineId, setBaselineId] = useState<string | null>(null)
-  const { selectedIds, toggle, select, isFull } = useModelSelection(models)
+  const { selectedIds, toggle, toggleFresh, select, isFull, touched } = useModelSelection(models)
 
   const visibleModels = useMemo(
     () => models.filter((m) => selectedProviders.includes(m.provider)),
@@ -74,6 +80,9 @@ export function PortalStateProvider({ children }: { children: ReactNode }) {
     selectedIds,
     toggleSelected: toggle,
     isSelectionFull: isFull,
+    hasUserSelection: touched,
+    userSelectedIds: touched ? selectedIds : [],
+    toggleCompare: toggleFresh,
     compare: (toCompare) => {
       select(toCompare.map((m) => m.id))
       navigate('/comparador')

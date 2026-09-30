@@ -1,16 +1,16 @@
 import type { Provider } from '@/types/model'
+import { providerColor } from '@/theme/providers'
 
-const styles: Record<Provider, string> = {
-  Anthropic: 'bg-orange-100 text-orange-700 dark:bg-orange-500/10 dark:text-orange-400',
-  OpenAI: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400',
-  Google: 'bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400',
-}
-
+// El color de marca va en el punto; el texto usa tinta neutra para que el
+// badge sea legible en ambos temas y no se confunda con colores semánticos.
 export function ProviderBadge({ provider }: { provider: Provider }) {
   return (
-    <span
-      className={`inline-flex w-fit shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-medium ${styles[provider]}`}
-    >
+    <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-0.5 text-xs font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
+      <span
+        aria-hidden
+        className="h-2 w-2 rounded-full"
+        style={{ backgroundColor: providerColor(provider) }}
+      />
       {provider}
     </span>
   )

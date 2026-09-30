@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router'
 import { Header } from '@/components/Header'
+import { CompareTray } from '@/components/CompareTray'
 import { PortalStateProvider } from '@/state/PortalState'
 import { generatedAt, qualityMeta } from '@/data/models'
 import { formatDate } from '@/utils/format'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
+  // Solo al cambiar de página: los cambios de filtros (query params) no suben el scroll.
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
@@ -17,7 +19,8 @@ export function Layout() {
   return (
     <PortalStateProvider>
       <ScrollToTop />
-      <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-950">
+      {/* pb-36 en móvil: barra inferior + bandeja de comparación. */}
+      <div className="flex min-h-screen flex-col bg-slate-50 pb-36 sm:pb-24 dark:bg-slate-950">
         <Header />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
           <Outlet />
@@ -31,11 +34,12 @@ export function Layout() {
               {qualityMeta?.publishedAt ? ` (publicado ${formatDate(qualityMeta.publishedAt)})` : ''}.
             </p>
             <Link to="/metodologia" className="underline hover:text-slate-600 dark:hover:text-slate-300">
-              Cómo calculamos esto
+              Metodología: cómo calculamos esto
             </Link>
           </div>
         </footer>
       </div>
+      <CompareTray />
     </PortalStateProvider>
   )
 }

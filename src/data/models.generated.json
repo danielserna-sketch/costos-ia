@@ -1,5 +1,6 @@
 {
-  "generatedAt": "2026-09-30T11:53:33.470Z",
+  "generatedAt": "2026-09-30T15:58:16.450Z",
+  "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
     "publishedAt": "2026-09-25"
@@ -14,6 +15,21 @@
       "contextWindow": 1000000,
       "tier": "Anthropic:fable",
       "cachedInputPricePerMTokens": 0.25,
+      "cacheWritePricePerMTokens": 12.5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1511,
@@ -56,6 +72,21 @@
       "contextWindow": 200000,
       "tier": "Anthropic:haiku",
       "cachedInputPricePerMTokens": 0.1,
+      "cacheWritePricePerMTokens": 1.25,
+      "maxOutputTokens": 64000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1396,
@@ -97,7 +128,22 @@
       "outputPricePerMTokens": 50,
       "contextWindow": 1000000,
       "tier": "Anthropic:mythos",
-      "cachedInputPricePerMTokens": 0.25
+      "cachedInputPricePerMTokens": 0.25,
+      "cacheWritePricePerMTokens": 12.5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": null
     },
     {
       "id": "claude-opus-5-5",
@@ -108,6 +154,21 @@
       "contextWindow": 1000000,
       "tier": "Anthropic:opus",
       "cachedInputPricePerMTokens": 0.2,
+      "cacheWritePricePerMTokens": 5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1518,
@@ -149,7 +210,23 @@
       "outputPricePerMTokens": 10,
       "contextWindow": 1000000,
       "tier": "Anthropic:sonnet",
-      "cachedInputPricePerMTokens": 0.2
+      "cachedInputPricePerMTokens": 0.2,
+      "cacheWritePricePerMTokens": 2.5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": null
     },
     {
       "id": "gpt-5-chat",
@@ -160,6 +237,19 @@
       "contextWindow": 128000,
       "tier": "OpenAI:gpt-chat",
       "cachedInputPricePerMTokens": 0.125,
+      "maxOutputTokens": 16384,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "deprecationDate": "2026-07-23",
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1403,
@@ -202,6 +292,20 @@
       "contextWindow": 272000,
       "tier": "OpenAI:gpt-mini",
       "cachedInputPricePerMTokens": 0.075,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1411,
@@ -244,6 +348,20 @@
       "contextWindow": 272000,
       "tier": "OpenAI:gpt-nano",
       "cachedInputPricePerMTokens": 0.02,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1372,
@@ -285,7 +403,27 @@
       "outputPricePerMTokens": 20,
       "contextWindow": 922000,
       "tier": "OpenAI:gpt",
-      "cachedInputPricePerMTokens": 0.4
+      "cachedInputPricePerMTokens": 0.4,
+      "cacheWritePricePerMTokens": 5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 272000,
+        "inputPricePerMTokens": 8,
+        "outputPricePerMTokens": 30
+      },
+      "firstSeenAt": null
     },
     {
       "id": "gpt-5.6-cyber",
@@ -295,7 +433,28 @@
       "outputPricePerMTokens": 75,
       "contextWindow": 400000,
       "tier": "OpenAI:gpt-cyber",
-      "cachedInputPricePerMTokens": 1.25
+      "cachedInputPricePerMTokens": 1.25,
+      "cacheWritePricePerMTokens": 15.625,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 272000,
+        "inputPricePerMTokens": 25,
+        "outputPricePerMTokens": 112.5
+      },
+      "firstSeenAt": null
     },
     {
       "id": "gpt-5.6-terra",
@@ -306,6 +465,26 @@
       "contextWindow": 922000,
       "tier": "OpenAI:gpt-terra",
       "cachedInputPricePerMTokens": 0.2,
+      "cacheWritePricePerMTokens": 2.5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 272000,
+        "inputPricePerMTokens": 4,
+        "outputPricePerMTokens": 18
+      },
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1446,
@@ -348,6 +527,27 @@
       "contextWindow": 922000,
       "tier": "OpenAI:gpt-astra",
       "cachedInputPricePerMTokens": 1,
+      "cacheWritePricePerMTokens": 12.5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 272000,
+        "inputPricePerMTokens": 20,
+        "outputPricePerMTokens": 75
+      },
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1443,
@@ -390,6 +590,27 @@
       "contextWindow": 922000,
       "tier": "OpenAI:gpt-luna",
       "cachedInputPricePerMTokens": 0.01,
+      "cacheWritePricePerMTokens": 0.125,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 272000,
+        "inputPricePerMTokens": 0.2,
+        "outputPricePerMTokens": 0.75
+      },
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1392,
@@ -431,7 +652,28 @@
       "outputPricePerMTokens": 10,
       "contextWindow": 922000,
       "tier": "OpenAI:gpt-sol",
-      "cachedInputPricePerMTokens": 0.1
+      "cachedInputPricePerMTokens": 0.1,
+      "cacheWritePricePerMTokens": 2.5,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 272000,
+        "inputPricePerMTokens": 4,
+        "outputPricePerMTokens": 15
+      },
+      "firstSeenAt": null
     },
     {
       "id": "o3",
@@ -442,6 +684,20 @@
       "contextWindow": 200000,
       "tier": "OpenAI:o",
       "cachedInputPricePerMTokens": 0.5,
+      "maxOutputTokens": 100000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1410,
@@ -484,6 +740,21 @@
       "contextWindow": 200000,
       "tier": "OpenAI:o-mini",
       "cachedInputPricePerMTokens": 0.275,
+      "maxOutputTokens": 100000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "deprecationDate": "2026-10-23",
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1353,
@@ -526,6 +797,27 @@
       "contextWindow": 1048576,
       "tier": "Google:pro",
       "cachedInputPricePerMTokens": 0.125,
+      "maxOutputTokens": 65536,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf",
+        "audio",
+        "video"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 200000,
+        "inputPricePerMTokens": 2.5,
+        "outputPricePerMTokens": 15
+      },
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1458,
@@ -568,6 +860,22 @@
       "contextWindow": 1048576,
       "tier": "Google:flash-lite",
       "cachedInputPricePerMTokens": 0.03,
+      "maxOutputTokens": 65536,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf",
+        "audio",
+        "video"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1436,
@@ -610,6 +918,22 @@
       "contextWindow": 1048576,
       "tier": "Google:flash",
       "cachedInputPricePerMTokens": 0.075,
+      "maxOutputTokens": 65536,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf",
+        "audio",
+        "video"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "firstSeenAt": null,
       "quality": {
         "overall": {
           "rating": 1494,
@@ -640,6 +964,415 @@
           "rating": 1503,
           "votes": 3352,
           "variant": "gemini-3.8-flash-high"
+        }
+      }
+    },
+    {
+      "id": "grok-4.7",
+      "provider": "xAI",
+      "name": "Grok 4.7",
+      "inputPricePerMTokens": 2,
+      "outputPricePerMTokens": 6,
+      "contextWindow": 500000,
+      "tier": "xAI:grok",
+      "cachedInputPricePerMTokens": 0.5,
+      "maxOutputTokens": 500000,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 200000,
+        "inputPricePerMTokens": 4,
+        "outputPricePerMTokens": 12
+      },
+      "firstSeenAt": null,
+      "quality": {
+        "overall": {
+          "rating": 1397,
+          "votes": 4114,
+          "variant": "grok-4.7-xhigh"
+        },
+        "coding": {
+          "rating": 1423,
+          "votes": 936,
+          "variant": "grok-4.7-xhigh"
+        },
+        "hard_prompts": {
+          "rating": 1409,
+          "votes": 2491,
+          "variant": "grok-4.7-xhigh"
+        },
+        "instruction_following": {
+          "rating": 1406,
+          "votes": 1382,
+          "variant": "grok-4.7-xhigh"
+        },
+        "longer_query": {
+          "rating": 1416,
+          "votes": 1673,
+          "variant": "grok-4.7-xhigh"
+        },
+        "multi_turn": {
+          "rating": 1389,
+          "votes": 592,
+          "variant": "grok-4.7-xhigh"
+        }
+      }
+    },
+    {
+      "id": "grok-code-fast-1",
+      "provider": "xAI",
+      "name": "Grok Code Fast 1",
+      "inputPricePerMTokens": 1,
+      "outputPricePerMTokens": 2,
+      "contextWindow": 256000,
+      "tier": "xAI:grok-code-fast",
+      "cachedInputPricePerMTokens": 0.2,
+      "maxOutputTokens": 256000,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 200000,
+        "inputPricePerMTokens": 2,
+        "outputPricePerMTokens": 4
+      },
+      "firstSeenAt": null
+    },
+    {
+      "id": "devstral-medium-latest",
+      "provider": "Mistral",
+      "name": "Devstral Medium",
+      "inputPricePerMTokens": 0.4,
+      "outputPricePerMTokens": 2,
+      "contextWindow": 256000,
+      "tier": "Mistral:devstral-medium",
+      "cachedInputPricePerMTokens": 0.04,
+      "maxOutputTokens": 256000,
+      "inputModalities": [
+        "text"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "caching"
+      ],
+      "firstSeenAt": null
+    },
+    {
+      "id": "devstral-small-latest",
+      "provider": "Mistral",
+      "name": "Devstral Small",
+      "inputPricePerMTokens": 0.1,
+      "outputPricePerMTokens": 0.3,
+      "contextWindow": 256000,
+      "tier": "Mistral:devstral-small",
+      "cachedInputPricePerMTokens": 0.01,
+      "maxOutputTokens": 256000,
+      "inputModalities": [
+        "text"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "caching"
+      ],
+      "firstSeenAt": null
+    },
+    {
+      "id": "magistral-medium-latest",
+      "provider": "Mistral",
+      "name": "Magistral Medium",
+      "inputPricePerMTokens": 1.5,
+      "outputPricePerMTokens": 7.5,
+      "contextWindow": 262144,
+      "tier": "Mistral:magistral-medium",
+      "cachedInputPricePerMTokens": 0.15,
+      "maxOutputTokens": 262144,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "firstSeenAt": null
+    },
+    {
+      "id": "magistral-small-latest",
+      "provider": "Mistral",
+      "name": "Magistral Small",
+      "inputPricePerMTokens": 0.15,
+      "outputPricePerMTokens": 0.6,
+      "contextWindow": 262144,
+      "tier": "Mistral:magistral-small",
+      "cachedInputPricePerMTokens": 0.015,
+      "maxOutputTokens": 262144,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "firstSeenAt": null
+    },
+    {
+      "id": "mistral-large-3",
+      "provider": "Mistral",
+      "name": "Mistral Large 3",
+      "inputPricePerMTokens": 0.5,
+      "outputPricePerMTokens": 1.5,
+      "contextWindow": 262144,
+      "tier": "Mistral:mistral-large",
+      "cachedInputPricePerMTokens": 0.05,
+      "maxOutputTokens": 262144,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "caching"
+      ],
+      "firstSeenAt": null,
+      "quality": {
+        "overall": {
+          "rating": 1427,
+          "votes": 77456,
+          "variant": "mistral-large-3"
+        },
+        "coding": {
+          "rating": 1447,
+          "votes": 19574,
+          "variant": "mistral-large-3"
+        },
+        "hard_prompts": {
+          "rating": 1429,
+          "votes": 47316,
+          "variant": "mistral-large-3"
+        },
+        "instruction_following": {
+          "rating": 1402,
+          "votes": 24861,
+          "variant": "mistral-large-3"
+        },
+        "longer_query": {
+          "rating": 1413,
+          "votes": 29146,
+          "variant": "mistral-large-3"
+        },
+        "multi_turn": {
+          "rating": 1429,
+          "votes": 13164,
+          "variant": "mistral-large-3"
+        }
+      }
+    },
+    {
+      "id": "mistral-medium-3-5",
+      "provider": "Mistral",
+      "name": "Mistral Medium 3.5",
+      "inputPricePerMTokens": 1.5,
+      "outputPricePerMTokens": 7.5,
+      "contextWindow": 262144,
+      "tier": "Mistral:mistral-medium",
+      "cachedInputPricePerMTokens": 0.15,
+      "maxOutputTokens": 262144,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "firstSeenAt": null,
+      "quality": {
+        "overall": {
+          "rating": 1421,
+          "votes": 11693,
+          "variant": "mistral-medium-3.5"
+        },
+        "coding": {
+          "rating": 1461,
+          "votes": 3282,
+          "variant": "mistral-medium-3.5"
+        },
+        "hard_prompts": {
+          "rating": 1436,
+          "votes": 7627,
+          "variant": "mistral-medium-3.5"
+        },
+        "instruction_following": {
+          "rating": 1414,
+          "votes": 3827,
+          "variant": "mistral-medium-3.5"
+        },
+        "longer_query": {
+          "rating": 1414,
+          "votes": 5065,
+          "variant": "mistral-medium-3.5"
+        },
+        "multi_turn": {
+          "rating": 1423,
+          "votes": 1925,
+          "variant": "mistral-medium-3.5"
+        }
+      }
+    },
+    {
+      "id": "mistral-small-latest",
+      "provider": "Mistral",
+      "name": "Mistral Small",
+      "inputPricePerMTokens": 0.15,
+      "outputPricePerMTokens": 0.6,
+      "contextWindow": 262144,
+      "tier": "Mistral:mistral-small",
+      "cachedInputPricePerMTokens": 0.015,
+      "maxOutputTokens": 262144,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "firstSeenAt": null
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "provider": "DeepSeek",
+      "name": "DeepSeek V4 Flash",
+      "inputPricePerMTokens": 0.3,
+      "outputPricePerMTokens": 1.2,
+      "contextWindow": 1000000,
+      "tier": "DeepSeek:flash",
+      "cachedInputPricePerMTokens": 0.006,
+      "cacheWritePricePerMTokens": 0,
+      "maxOutputTokens": 393216,
+      "inputModalities": [
+        "text",
+        "image"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "firstSeenAt": null,
+      "quality": {
+        "overall": {
+          "rating": 1432,
+          "votes": 51871,
+          "variant": "deepseek-v4-flash"
+        },
+        "coding": {
+          "rating": 1457,
+          "votes": 15262,
+          "variant": "deepseek-v4-flash"
+        },
+        "hard_prompts": {
+          "rating": 1443,
+          "votes": 34753,
+          "variant": "deepseek-v4-flash"
+        },
+        "instruction_following": {
+          "rating": 1421,
+          "votes": 17961,
+          "variant": "deepseek-v4-flash"
+        },
+        "longer_query": {
+          "rating": 1435,
+          "votes": 23359,
+          "variant": "deepseek-v4-flash"
+        },
+        "multi_turn": {
+          "rating": 1449,
+          "votes": 9363,
+          "variant": "deepseek-v4-flash"
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "provider": "DeepSeek",
+      "name": "DeepSeek V4 Pro",
+      "inputPricePerMTokens": 1.32,
+      "outputPricePerMTokens": 3.96,
+      "contextWindow": 1000000,
+      "tier": "DeepSeek:pro",
+      "cachedInputPricePerMTokens": 0.044,
+      "cacheWritePricePerMTokens": 0,
+      "maxOutputTokens": 393216,
+      "inputModalities": [
+        "text"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "caching"
+      ],
+      "firstSeenAt": null,
+      "quality": {
+        "overall": {
+          "rating": 1451,
+          "votes": 57564,
+          "variant": "deepseek-v4-pro"
+        },
+        "coding": {
+          "rating": 1469,
+          "votes": 17165,
+          "variant": "deepseek-v4-pro"
+        },
+        "hard_prompts": {
+          "rating": 1461,
+          "votes": 38586,
+          "variant": "deepseek-v4-pro"
+        },
+        "instruction_following": {
+          "rating": 1445,
+          "votes": 20066,
+          "variant": "deepseek-v4-pro"
+        },
+        "longer_query": {
+          "rating": 1457,
+          "votes": 25983,
+          "variant": "deepseek-v4-pro"
+        },
+        "multi_turn": {
+          "rating": 1467,
+          "votes": 10367,
+          "variant": "deepseek-v4-pro"
         }
       }
     }
