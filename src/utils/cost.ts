@@ -17,11 +17,16 @@ export function calculateModelCost(
   }
 }
 
+// Decimales adaptativos: 2 para montos ≥ 1 y, por debajo, los necesarios
+// para mostrar hasta tres cifras significativas ($0,20 · $0,125 · $0,0012) en vez
+// de un "0,2000" fijo que agrega ruido.
 export function formatUsd(value: number): string {
+  const abs = Math.abs(value)
+  const significant = abs >= 1 || abs === 0 ? 2 : Math.ceil(-Math.log10(abs)) + 2
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: value < 1 ? 4 : 2,
-    maximumFractionDigits: value < 1 ? 4 : 2,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: Math.max(2, Math.min(significant, 6)),
   }).format(value)
 }

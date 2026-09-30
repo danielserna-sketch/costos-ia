@@ -22,7 +22,17 @@ const PROVIDER_MAP = {
   anthropic: 'Anthropic',
   openai: 'OpenAI',
   gemini: 'Google',
+  xai: 'xAI',
+  mistral: 'Mistral',
+  deepseek: 'DeepSeek',
 }
+
+// Proveedores sin los cuales el catálogo no tiene sentido: si alguno queda en
+// 0 modelos se aborta sin escribir. Para el resto solo se avisa (un cambio de
+// nombres en un proveedor secundario no debe bloquear la sincronización).
+// Meta no se incluye: LiteLLM no publica precios de su API propia (solo de
+// revendedores como Bedrock o Together, con precios distintos entre sí).
+const CORE_PROVIDERS = new Set(['Anthropic', 'OpenAI', 'Google'])
 
 function compareVersions(a, b) {
   const len = Math.max(a.length, b.length)
@@ -116,6 +126,102 @@ const EXTRACTORS = {
       name: `Gemini ${version.join('.')} ${words.map(capitalize).join('-')}`,
     }
   },
+  // xAI numera en decimal (4.20 es anterior a 4.3), así que la versión se
+  // compara como un único número. Los alias (-latest, -reasoning, -beta…)
+  // quedan fuera porque la forma exige que el id termine en la versión.
+  xai: (slug) => {
+    let m = slug.match(/^grok-(\d+(?:\.\d+)?)$/)
+    if (m) {
+      return { tier: 'grok', version: [Number(m[1])], name: `Grok ${m[1]}` }
+    }
+    m = slug.match(/^grok-code-fast-(\d+)$/)
+    if (m) {
+      return { tier: 'grok-code-fast', version: [Number(m[1])], name: `Grok Code Fast ${m[1]}` }
+    }
+    return null
+  },
+  deepseek: (slug) => {
+    const m = slug.match(/^deepseek-v(\d+(?:\.\d+)?)-([a-z]+)$/)
+    if (!m) return null
+    const [, versionStr, variant] = m
+    if (hasDeniedWord([variant])) return null
+    const version = versionStr.split('.').map(Number)
+    return {
+      tier: variant,
+      version,
+      name: `DeepSeek V${version.join('.')} ${capitalize(variant)}`,
+    }
+  },
+  // Mistral publica versiones numeradas (mistral-medium-3-5) solo para
+  // algunas líneas; para el resto se acepta el alias "-latest" (versión 0,
+  // así una numerada siempre le gana). Los snapshots fechados (-2512) quedan
+  // fuera por tener más de dos dígitos.
+  mistral: (slug) => {
+    const m = slug.match(
+      /^(mistral|magistral|devstral)-(large|medium|small)-(\d{1,2}(?:[.-]\d{1,2})?|latest)$/,
+    )
+    if (!m) return null
+    const [, family, size, versionStr] = m
+    const version = versionStr === 'latest' ? [0] : versionStr.split(/[.-]/).map(Number)
+    const versionLabel = versionStr === 'latest' ? '' : ` ${version.join('.')}`
+    return {
+      tier: `${family}-${size}`,
+      version,
+      name: `${capitalize(family)} ${capitalize(size)}${versionLabel}`,
+    }
+  },
+}
+
+// Umbrales de "contexto largo" que usa LiteLLM (ej.
+// input_cost_per_token_above_200k_tokens); se toma el más bajo presente.
+const LONG_CONTEXT_THRESHOLDS = [
+  ['32k', 32_000],
+  ['128k', 128_000],
+  ['200k', 200_000],
+  ['256k', 256_000],
+  ['272k', 272_000],
+  ['512k', 512_000],
+]
+
+function longContextPricing(entry) {
+  for (const [label, tokens] of LONG_CONTEXT_THRESHOLDS) {
+    const input = entry[`input_cost_per_token_above_${label}_tokens`]
+    const output = entry[`output_cost_per_token_above_${label}_tokens`]
+    if (input != null && output != null) {
+      return {
+        thresholdTokens: tokens,
+        inputPricePerMTokens: round(input * 1_000_000),
+        outputPricePerMTokens: round(output * 1_000_000),
+      }
+    }
+  }
+  return null
+}
+
+// Modalidades de entrada y capacidades, a partir de los flags `supports_*`
+// de LiteLLM. Un flag ausente se interpreta como "no soportado".
+function inputModalities(entry) {
+  const modalities = ['text']
+  if (entry.supports_vision || entry.supports_image_input) modalities.push('image')
+  if (entry.supports_pdf_input) modalities.push('pdf')
+  if (entry.supports_audio_input) modalities.push('audio')
+  if (entry.supports_video_input) modalities.push('video')
+  return modalities
+}
+
+function capabilities(entry) {
+  const caps = []
+  if (entry.supports_function_calling) caps.push('tools')
+  if (entry.supports_response_schema || entry.supports_native_structured_output) {
+    caps.push('structured')
+  }
+  if (entry.supports_reasoning) caps.push('reasoning')
+  if (entry.supports_web_search) caps.push('web')
+  if (entry.supports_prompt_caching || entry.cache_read_input_token_cost != null) {
+    caps.push('caching')
+  }
+  if (entry.supports_computer_use) caps.push('computer')
+  return caps
 }
 
 function round(value, decimals = 4) {
@@ -258,11 +364,8 @@ async function main() {
   const raw = await res.json()
 
   // Map<provider, Map<tier, candidato ganador>>
-  const winners = {
-    Anthropic: new Map(),
-    OpenAI: new Map(),
-    Google: new Map(),
-  }
+  const providerNames = Object.values(PROVIDER_MAP)
+  const winners = Object.fromEntries(providerNames.map((p) => [p, new Map()]))
 
   for (const [rawId, entry] of Object.entries(raw)) {
     if (!entry || typeof entry !== 'object') continue
@@ -305,10 +408,12 @@ async function main() {
     }
   }
 
-  const byProvider = { Anthropic: [], OpenAI: [], Google: [] }
+  const byProvider = Object.fromEntries(providerNames.map((p) => [p, []]))
 
   for (const [provider, tierMap] of Object.entries(winners)) {
     for (const [tier, { slug, entry, match }] of tierMap) {
+      // Precio 0 = modelo experimental/gratuito sin tarifa pública real.
+      if (entry.input_cost_per_token === 0 && entry.output_cost_per_token === 0) continue
       const model = {
         id: slug,
         provider,
@@ -323,20 +428,31 @@ async function main() {
           entry.cache_read_input_token_cost * 1_000_000,
         )
       }
+      if (entry.cache_creation_input_token_cost != null) {
+        model.cacheWritePricePerMTokens = round(
+          entry.cache_creation_input_token_cost * 1_000_000,
+        )
+      }
+      if (entry.max_output_tokens != null) model.maxOutputTokens = entry.max_output_tokens
+      model.inputModalities = inputModalities(entry)
+      model.capabilities = capabilities(entry)
+      const longContext = longContextPricing(entry)
+      if (longContext) model.longContextPricing = longContext
+      if (entry.deprecation_date) model.deprecationDate = entry.deprecation_date
       byProvider[provider].push(model)
     }
   }
 
   for (const [provider, list] of Object.entries(byProvider)) {
     if (list.length === 0) {
-      throw new Error(
-        `0 modelos coincidieron para ${provider} — abortando sin escribir (revisa EXTRACTORS o el dataset fuente).`,
-      )
+      const message = `0 modelos coincidieron para ${provider} (revisa EXTRACTORS o el dataset fuente)`
+      if (CORE_PROVIDERS.has(provider)) throw new Error(`${message} — abortando sin escribir.`)
+      console.warn(`Aviso: ${message}; se omite este proveedor.`)
     }
     list.sort((a, b) => a.name.localeCompare(b.name))
   }
 
-  const models = [...byProvider.Anthropic, ...byProvider.OpenAI, ...byProvider.Google]
+  const models = providerNames.flatMap((p) => byProvider[p])
 
   let previous = null
   try {
@@ -345,6 +461,20 @@ async function main() {
     // Primera corrida o archivo inválido.
   }
   const previousModels = Array.isArray(previous?.models) ? previous.models : []
+
+  // Fecha en que cada id apareció por primera vez en el catálogo; es la
+  // señal de "modelo nuevo" (LiteLLM no publica fechas de lanzamiento). Un
+  // cambio de versión dentro de un tier cambia el id y cuenta como nuevo.
+  // En la corrida que inicia el seguimiento (archivo previo sin
+  // `trackingSince`) todo queda en null = "anterior al seguimiento", para no
+  // marcar el catálogo entero como novedad.
+  const today = new Date().toISOString().slice(0, 10)
+  const trackingSince = previous?.trackingSince ?? today
+  const firstSeenById = new Map(previousModels.map((m) => [m.id, m.firstSeenAt ?? null]))
+  for (const model of models) {
+    if (!previous?.trackingSince) model.firstSeenAt = null
+    else model.firstSeenAt = firstSeenById.has(model.id) ? firstSeenById.get(model.id) : today
+  }
 
   // Calidad (LMArena). Si la descarga falla, se conservan los puntajes de la
   // corrida anterior en vez de borrarlos: un fallo transitorio no debe
@@ -380,6 +510,7 @@ async function main() {
   let changes = []
   if (previous) {
     if (
+      previous.trackingSince === trackingSince &&
       JSON.stringify(previousModels) === JSON.stringify(models) &&
       JSON.stringify(previous.quality ?? null) === JSON.stringify(quality)
     ) {
@@ -390,13 +521,12 @@ async function main() {
     }
   }
 
-  const output = { generatedAt, quality, models, changes }
+  const output = { generatedAt, trackingSince, quality, models, changes }
 
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n', 'utf-8')
 
-  console.log(
-    `Listo: ${models.length} modelos (Anthropic:${byProvider.Anthropic.length} OpenAI:${byProvider.OpenAI.length} Google:${byProvider.Google.length})`,
-  )
+  const counts = providerNames.map((p) => `${p}:${byProvider[p].length}`).join(' ')
+  console.log(`Listo: ${models.length} modelos (${counts})`)
 }
 
 main().catch((err) => {

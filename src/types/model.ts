@@ -1,4 +1,16 @@
-export type Provider = 'Anthropic' | 'OpenAI' | 'Google'
+export type Provider = 'Anthropic' | 'OpenAI' | 'Google' | 'xAI' | 'Mistral' | 'DeepSeek'
+
+/** Modalidades de entrada (flags `supports_*` de LiteLLM). */
+export type InputModality = 'text' | 'image' | 'pdf' | 'audio' | 'video'
+
+export type Capability = 'tools' | 'structured' | 'reasoning' | 'web' | 'caching' | 'computer'
+
+export interface LongContextPricing {
+  /** A partir de cuántos tokens de entrada aplica la tarifa. */
+  thresholdTokens: number
+  inputPricePerMTokens: number
+  outputPricePerMTokens: number
+}
 
 /** Categorías del leaderboard de LMArena que usamos como señal de calidad. */
 export type QualityCategory =
@@ -38,6 +50,17 @@ export interface ModelPricing {
    * detectar cambios de precio entre versiones. Solo la fija sync-pricing. */
   tier?: string
   quality?: Partial<Record<QualityCategory, QualityScore>>
+  /** USD per 1M tokens escritos en caché, si el proveedor lo cobra aparte. */
+  cacheWritePricePerMTokens?: number
+  maxOutputTokens?: number
+  inputModalities?: InputModality[]
+  capabilities?: Capability[]
+  longContextPricing?: LongContextPricing
+  /** Fecha de retiro anunciada (YYYY-MM-DD). */
+  deprecationDate?: string
+  /** Fecha (YYYY-MM-DD) en que el id apareció en el catálogo; null si ya
+   * estaba antes de que empezara el seguimiento. */
+  firstSeenAt?: string | null
 }
 
 export interface PricingChange {

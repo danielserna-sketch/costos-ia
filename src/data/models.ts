@@ -2,7 +2,14 @@ import type { ModelPricing, PricingChange, Provider, QualityMeta } from '@/types
 import { fallbackModels } from '@/data/models.fallback'
 import generated from '@/data/models.generated.json'
 
-const VALID_PROVIDERS: readonly Provider[] = ['Anthropic', 'OpenAI', 'Google']
+const VALID_PROVIDERS: readonly Provider[] = [
+  'Anthropic',
+  'OpenAI',
+  'Google',
+  'xAI',
+  'Mistral',
+  'DeepSeek',
+]
 
 function isModelPricing(value: unknown): value is ModelPricing {
   if (!value || typeof value !== 'object') return false
@@ -85,4 +92,7 @@ function loadQualityMeta(): QualityMeta | null {
 
 export const qualityMeta: QualityMeta | null = loaded ? loadQualityMeta() : null
 
-export const providers = VALID_PROVIDERS
+/** Proveedores con al menos un modelo en el catálogo actual. */
+export const providers: readonly Provider[] = VALID_PROVIDERS.filter((p) =>
+  models.some((m) => m.provider === p),
+)

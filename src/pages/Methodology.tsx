@@ -34,11 +34,15 @@ export function Methodology() {
       <div className="flex flex-col gap-4">
         <Block title="Precios y modelos">
           <p>
-            Ninguno de los tres proveedores publica una API oficial de precios. Los
+            Los proveedores (Anthropic, OpenAI, Google, xAI, Mistral y DeepSeek) no publican una API oficial de precios. Los
             precios salen del dataset comunitario de{' '}
             <ExternalLink href="https://github.com/BerriAI/litellm">LiteLLM</ExternalLink>,
             que se sincroniza cada día con una tarea automática
-            {generatedAt ? ` (última actualización: ${formatDate(generatedAt)})` : ''}.
+            {generatedAt ? ` (última actualización: ${formatDate(generatedAt)})` : ''}. De
+            ahí salen también el contexto, la salida máxima, las modalidades de entrada,
+            las capacidades (tools, JSON, razonamiento, web, caché) y las fechas de retiro.
+            Meta no aparece porque el dataset no trae sus modelos de forma directa, y la
+            latencia no se muestra por no haber una fuente automática confiable.
           </p>
           <p>
             Por cada línea de producto (por ejemplo Claude Sonnet, GPT mini o Gemini
