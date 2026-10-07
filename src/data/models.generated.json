@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T11:04:01.701Z",
+  "generatedAt": "2026-10-07T12:37:05.532Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
@@ -1204,15 +1204,14 @@
       "firstSeenAt": null
     },
     {
-      "id": "mistral-large-3",
+      "id": "mistral-large-4-0",
       "provider": "Mistral",
-      "name": "Mistral Large 3",
-      "inputPricePerMTokens": 0.5,
-      "outputPricePerMTokens": 1.5,
-      "contextWindow": 262144,
+      "name": "Mistral Large 4.0",
+      "inputPricePerMTokens": 0.68,
+      "outputPricePerMTokens": 2.09,
+      "contextWindow": 524288,
       "tier": "Mistral:mistral-large",
-      "cachedInputPricePerMTokens": 0.05,
-      "maxOutputTokens": 262144,
+      "cachedInputPricePerMTokens": 0.068,
       "inputModalities": [
         "text",
         "image"
@@ -1220,41 +1219,10 @@
       "capabilities": [
         "tools",
         "structured",
+        "reasoning",
         "caching"
       ],
-      "firstSeenAt": null,
-      "quality": {
-        "overall": {
-          "rating": 1428,
-          "votes": 79452,
-          "variant": "mistral-large-3"
-        },
-        "coding": {
-          "rating": 1447,
-          "votes": 20029,
-          "variant": "mistral-large-3"
-        },
-        "hard_prompts": {
-          "rating": 1429,
-          "votes": 48464,
-          "variant": "mistral-large-3"
-        },
-        "instruction_following": {
-          "rating": 1402,
-          "votes": 25505,
-          "variant": "mistral-large-3"
-        },
-        "longer_query": {
-          "rating": 1413,
-          "votes": 29997,
-          "variant": "mistral-large-3"
-        },
-        "multi_turn": {
-          "rating": 1429,
-          "votes": 13448,
-          "variant": "mistral-large-3"
-        }
-      }
+      "firstSeenAt": "2026-10-07"
     },
     {
       "id": "mistral-medium-3-5",
@@ -1442,5 +1410,15 @@
       }
     }
   ],
-  "changes": []
+  "changes": [
+    {
+      "provider": "Mistral",
+      "oldName": "Mistral Large 3",
+      "newName": "Mistral Large 4.0",
+      "oldInputPricePerMTokens": 0.5,
+      "newInputPricePerMTokens": 0.68,
+      "oldOutputPricePerMTokens": 1.5,
+      "newOutputPricePerMTokens": 2.09
+    }
+  ]
 }
