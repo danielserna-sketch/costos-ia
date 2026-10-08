@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T12:37:05.532Z",
+  "generatedAt": "2026-10-08T12:47:01.901Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
@@ -64,16 +64,16 @@
       }
     },
     {
-      "id": "claude-haiku-4-5",
+      "id": "claude-haiku-5-5",
       "provider": "Anthropic",
-      "name": "Claude Haiku 4.5",
-      "inputPricePerMTokens": 1,
-      "outputPricePerMTokens": 5,
-      "contextWindow": 200000,
+      "name": "Claude Haiku 5.5",
+      "inputPricePerMTokens": 0.1,
+      "outputPricePerMTokens": 0.5,
+      "contextWindow": 1000000,
       "tier": "Anthropic:haiku",
-      "cachedInputPricePerMTokens": 0.1,
-      "cacheWritePricePerMTokens": 1.25,
-      "maxOutputTokens": 64000,
+      "cachedInputPricePerMTokens": 0.01,
+      "cacheWritePricePerMTokens": 0.125,
+      "maxOutputTokens": 128000,
       "inputModalities": [
         "text",
         "image",
@@ -83,42 +83,11 @@
         "tools",
         "structured",
         "reasoning",
+        "web",
         "caching",
         "computer"
       ],
-      "firstSeenAt": null,
-      "quality": {
-        "overall": {
-          "rating": 1396,
-          "votes": 143402,
-          "variant": "claude-haiku-4-5-20251001"
-        },
-        "coding": {
-          "rating": 1453,
-          "votes": 37062,
-          "variant": "claude-haiku-4-5-20251001"
-        },
-        "hard_prompts": {
-          "rating": 1420,
-          "votes": 88434,
-          "variant": "claude-haiku-4-5-20251001"
-        },
-        "instruction_following": {
-          "rating": 1414,
-          "votes": 45700,
-          "variant": "claude-haiku-4-5-20251001"
-        },
-        "longer_query": {
-          "rating": 1427,
-          "votes": 54129,
-          "variant": "claude-haiku-4-5-20251001"
-        },
-        "multi_turn": {
-          "rating": 1409,
-          "votes": 25086,
-          "variant": "claude-haiku-4-5-20251001"
-        }
-      }
+      "firstSeenAt": "2026-10-08"
     },
     {
       "id": "claude-mythos-5-1",
@@ -210,7 +179,7 @@
       "outputPricePerMTokens": 10,
       "contextWindow": 1000000,
       "tier": "Anthropic:sonnet",
-      "cachedInputPricePerMTokens": 0.2,
+      "cachedInputPricePerMTokens": 0.1,
       "cacheWritePricePerMTokens": 2.5,
       "maxOutputTokens": 128000,
       "inputModalities": [
@@ -1412,13 +1381,13 @@
   ],
   "changes": [
     {
-      "provider": "Mistral",
-      "oldName": "Mistral Large 3",
-      "newName": "Mistral Large 4.0",
-      "oldInputPricePerMTokens": 0.5,
-      "newInputPricePerMTokens": 0.68,
-      "oldOutputPricePerMTokens": 1.5,
-      "newOutputPricePerMTokens": 2.09
+      "provider": "Anthropic",
+      "oldName": "Claude Haiku 4.5",
+      "newName": "Claude Haiku 5.5",
+      "oldInputPricePerMTokens": 1,
+      "newInputPricePerMTokens": 0.1,
+      "oldOutputPricePerMTokens": 5,
+      "newOutputPricePerMTokens": 0.5
     }
   ]
 }
