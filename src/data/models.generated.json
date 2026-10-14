@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-09T12:32:23.256Z",
+  "generatedAt": "2026-10-14T11:08:27.289Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-13"
   },
   "models": [
     {
@@ -34,32 +34,32 @@
       "quality": {
         "overall": {
           "rating": 1510,
-          "votes": 13063,
+          "votes": 14121,
           "variant": "claude-fable-5.1-max"
         },
         "coding": {
-          "rating": 1528,
-          "votes": 2601,
+          "rating": 1529,
+          "votes": 2816,
           "variant": "claude-fable-5.1-max"
         },
         "hard_prompts": {
           "rating": 1526,
-          "votes": 7642,
+          "votes": 8244,
           "variant": "claude-fable-5.1-max"
         },
         "instruction_following": {
-          "rating": 1517,
-          "votes": 3900,
+          "rating": 1515,
+          "votes": 4222,
           "variant": "claude-fable-5.1-max"
         },
         "longer_query": {
           "rating": 1522,
-          "votes": 5393,
+          "votes": 5840,
           "variant": "claude-fable-5.1-max"
         },
         "multi_turn": {
-          "rating": 1492,
-          "votes": 1717,
+          "rating": 1493,
+          "votes": 1864,
           "variant": "claude-fable-5.1-max"
         }
       }
@@ -142,33 +142,33 @@
       "firstSeenAt": null,
       "quality": {
         "overall": {
-          "rating": 1515,
-          "votes": 6272,
+          "rating": 1516,
+          "votes": 7687,
           "variant": "claude-opus-5.5-high"
         },
         "coding": {
-          "rating": 1547,
-          "votes": 1444,
+          "rating": 1543,
+          "votes": 1755,
           "variant": "claude-opus-5.5-high"
         },
         "hard_prompts": {
-          "rating": 1535,
-          "votes": 3901,
+          "rating": 1534,
+          "votes": 4793,
           "variant": "claude-opus-5.5-high"
         },
         "instruction_following": {
-          "rating": 1537,
-          "votes": 2158,
+          "rating": 1535,
+          "votes": 2639,
           "variant": "claude-opus-5.5-high"
         },
         "longer_query": {
-          "rating": 1532,
-          "votes": 2640,
+          "rating": 1530,
+          "votes": 3254,
           "variant": "claude-opus-5.5-high"
         },
         "multi_turn": {
-          "rating": 1499,
-          "votes": 804,
+          "rating": 1501,
+          "votes": 999,
           "variant": "claude-opus-5.5-high"
         }
       }
@@ -201,32 +201,32 @@
       "quality": {
         "overall": {
           "rating": 1471,
-          "votes": 4838,
+          "votes": 6254,
           "variant": "claude-sonnet-5.5-xhigh"
         },
         "coding": {
-          "rating": 1513,
-          "votes": 1176,
+          "rating": 1509,
+          "votes": 1506,
           "variant": "claude-sonnet-5.5-xhigh"
         },
         "hard_prompts": {
-          "rating": 1495,
-          "votes": 3023,
+          "rating": 1493,
+          "votes": 3886,
           "variant": "claude-sonnet-5.5-xhigh"
         },
         "instruction_following": {
-          "rating": 1495,
-          "votes": 1626,
+          "rating": 1488,
+          "votes": 2124,
           "variant": "claude-sonnet-5.5-xhigh"
         },
         "longer_query": {
-          "rating": 1498,
-          "votes": 2038,
+          "rating": 1495,
+          "votes": 2627,
           "variant": "claude-sonnet-5.5-xhigh"
         },
         "multi_turn": {
-          "rating": 1474,
-          "votes": 699,
+          "rating": 1462,
+          "votes": 919,
           "variant": "claude-sonnet-5.5-xhigh"
         }
       }
@@ -256,7 +256,7 @@
       "quality": {
         "overall": {
           "rating": 1403,
-          "votes": 31203,
+          "votes": 31201,
           "variant": "gpt-5-chat"
         },
         "coding": {
@@ -266,7 +266,7 @@
         },
         "hard_prompts": {
           "rating": 1404,
-          "votes": 15202,
+          "votes": 15203,
           "variant": "gpt-5-chat"
         },
         "instruction_following": {
@@ -276,12 +276,12 @@
         },
         "longer_query": {
           "rating": 1399,
-          "votes": 6846,
+          "votes": 6844,
           "variant": "gpt-5-chat"
         },
         "multi_turn": {
           "rating": 1426,
-          "votes": 5684,
+          "votes": 5685,
           "variant": "gpt-5-chat"
         }
       }
@@ -311,33 +311,33 @@
       "firstSeenAt": null,
       "quality": {
         "overall": {
-          "rating": 1411,
-          "votes": 63493,
+          "rating": 1412,
+          "votes": 63461,
           "variant": "gpt-5.4-mini-high"
         },
         "coding": {
           "rating": 1438,
-          "votes": 17248,
+          "votes": 17247,
           "variant": "gpt-5.4-mini-high"
         },
         "hard_prompts": {
           "rating": 1424,
-          "votes": 41689,
+          "votes": 41669,
           "variant": "gpt-5.4-mini-high"
         },
         "instruction_following": {
           "rating": 1405,
-          "votes": 21761,
+          "votes": 21749,
           "variant": "gpt-5.4-mini-high"
         },
         "longer_query": {
           "rating": 1407,
-          "votes": 27816,
+          "votes": 27801,
           "variant": "gpt-5.4-mini-high"
         },
         "multi_turn": {
           "rating": 1429,
-          "votes": 11881,
+          "votes": 11884,
           "variant": "gpt-5.4-mini-high"
         }
       }
@@ -369,32 +369,32 @@
       "quality": {
         "overall": {
           "rating": 1372,
-          "votes": 62468,
+          "votes": 62426,
           "variant": "gpt-5.4-nano-high"
         },
         "coding": {
           "rating": 1405,
-          "votes": 17671,
+          "votes": 17675,
           "variant": "gpt-5.4-nano-high"
         },
         "hard_prompts": {
           "rating": 1381,
-          "votes": 41371,
+          "votes": 41350,
           "variant": "gpt-5.4-nano-high"
         },
         "instruction_following": {
           "rating": 1362,
-          "votes": 21512,
+          "votes": 21500,
           "variant": "gpt-5.4-nano-high"
         },
         "longer_query": {
-          "rating": 1366,
-          "votes": 27766,
+          "rating": 1365,
+          "votes": 27748,
           "variant": "gpt-5.4-nano-high"
         },
         "multi_turn": {
           "rating": 1382,
-          "votes": 11796,
+          "votes": 11791,
           "variant": "gpt-5.4-nano-high"
         }
       }
@@ -492,32 +492,32 @@
       "quality": {
         "overall": {
           "rating": 1447,
-          "votes": 40278,
+          "votes": 42358,
           "variant": "gpt-5.6-terra-xhigh"
         },
         "coding": {
-          "rating": 1484,
-          "votes": 10832,
+          "rating": 1485,
+          "votes": 11280,
           "variant": "gpt-5.6-terra-xhigh"
         },
         "hard_prompts": {
           "rating": 1468,
-          "votes": 26394,
+          "votes": 27663,
           "variant": "gpt-5.6-terra-xhigh"
         },
         "instruction_following": {
-          "rating": 1454,
-          "votes": 14363,
+          "rating": 1455,
+          "votes": 15046,
           "variant": "gpt-5.6-terra-xhigh"
         },
         "longer_query": {
-          "rating": 1451,
-          "votes": 18829,
+          "rating": 1453,
+          "votes": 19741,
           "variant": "gpt-5.6-terra-xhigh"
         },
         "multi_turn": {
-          "rating": 1449,
-          "votes": 6539,
+          "rating": 1451,
+          "votes": 6820,
           "variant": "gpt-5.6-terra-xhigh"
         }
       }
@@ -554,33 +554,33 @@
       "firstSeenAt": null,
       "quality": {
         "overall": {
-          "rating": 1440,
-          "votes": 10536,
+          "rating": 1442,
+          "votes": 11674,
           "variant": "gpt-6-astra-max"
         },
         "coding": {
-          "rating": 1487,
-          "votes": 2424,
+          "rating": 1489,
+          "votes": 2659,
           "variant": "gpt-6-astra-max"
         },
         "hard_prompts": {
-          "rating": 1462,
-          "votes": 6408,
+          "rating": 1464,
+          "votes": 7117,
           "variant": "gpt-6-astra-max"
         },
         "instruction_following": {
-          "rating": 1450,
-          "votes": 3330,
+          "rating": 1454,
+          "votes": 3666,
           "variant": "gpt-6-astra-max"
         },
         "longer_query": {
-          "rating": 1456,
-          "votes": 4424,
+          "rating": 1461,
+          "votes": 4917,
           "variant": "gpt-6-astra-max"
         },
         "multi_turn": {
-          "rating": 1448,
-          "votes": 1443,
+          "rating": 1450,
+          "votes": 1593,
           "variant": "gpt-6-astra-max"
         }
       }
@@ -617,33 +617,33 @@
       "firstSeenAt": null,
       "quality": {
         "overall": {
-          "rating": 1391,
-          "votes": 28632,
+          "rating": 1392,
+          "votes": 43294,
           "variant": "gpt-6-luna-max"
         },
         "coding": {
           "rating": 1439,
-          "votes": 6559,
+          "votes": 9840,
           "variant": "gpt-6-luna-max"
         },
         "hard_prompts": {
           "rating": 1411,
-          "votes": 17542,
+          "votes": 26694,
           "variant": "gpt-6-luna-max"
         },
         "instruction_following": {
           "rating": 1409,
-          "votes": 9780,
+          "votes": 14811,
           "variant": "gpt-6-luna-max"
         },
         "longer_query": {
-          "rating": 1409,
-          "votes": 12296,
+          "rating": 1408,
+          "votes": 18718,
           "variant": "gpt-6-luna-max"
         },
         "multi_turn": {
-          "rating": 1396,
-          "votes": 4124,
+          "rating": 1392,
+          "votes": 6144,
           "variant": "gpt-6-luna-max"
         }
       }
@@ -681,32 +681,32 @@
       "quality": {
         "overall": {
           "rating": 1447,
-          "votes": 4512,
+          "votes": 5762,
           "variant": "gpt-6.1-sol-max"
         },
         "coding": {
-          "rating": 1487,
-          "votes": 911,
+          "rating": 1482,
+          "votes": 1164,
           "variant": "gpt-6.1-sol-max"
         },
         "hard_prompts": {
-          "rating": 1466,
-          "votes": 2596,
+          "rating": 1467,
+          "votes": 3331,
           "variant": "gpt-6.1-sol-max"
         },
         "instruction_following": {
-          "rating": 1468,
-          "votes": 1355,
+          "rating": 1469,
+          "votes": 1752,
           "variant": "gpt-6.1-sol-max"
         },
         "longer_query": {
-          "rating": 1465,
-          "votes": 1736,
+          "rating": 1464,
+          "votes": 2277,
           "variant": "gpt-6.1-sol-max"
         },
         "multi_turn": {
-          "rating": 1449,
-          "votes": 600,
+          "rating": 1441,
+          "votes": 781,
           "variant": "gpt-6.1-sol-max"
         }
       }
@@ -737,7 +737,7 @@
       "quality": {
         "overall": {
           "rating": 1410,
-          "votes": 58913,
+          "votes": 58909,
           "variant": "o3-2025-04-16"
         },
         "coding": {
@@ -747,22 +747,22 @@
         },
         "hard_prompts": {
           "rating": 1402,
-          "votes": 25535,
+          "votes": 25528,
           "variant": "o3-2025-04-16"
         },
         "instruction_following": {
           "rating": 1368,
-          "votes": 15509,
+          "votes": 15503,
           "variant": "o3-2025-04-16"
         },
         "longer_query": {
           "rating": 1372,
-          "votes": 11545,
+          "votes": 11541,
           "variant": "o3-2025-04-16"
         },
         "multi_turn": {
           "rating": 1405,
-          "votes": 9655,
+          "votes": 9656,
           "variant": "o3-2025-04-16"
         }
       }
@@ -794,22 +794,22 @@
       "quality": {
         "overall": {
           "rating": 1353,
-          "votes": 44858,
+          "votes": 44856,
           "variant": "o4-mini-2025-04-16"
         },
         "coding": {
           "rating": 1368,
-          "votes": 8653,
+          "votes": 8656,
           "variant": "o4-mini-2025-04-16"
         },
         "hard_prompts": {
-          "rating": 1351,
+          "rating": 1350,
           "votes": 19389,
           "variant": "o4-mini-2025-04-16"
         },
         "instruction_following": {
-          "rating": 1321,
-          "votes": 11892,
+          "rating": 1320,
+          "votes": 11890,
           "variant": "o4-mini-2025-04-16"
         },
         "longer_query": {
@@ -819,7 +819,7 @@
         },
         "multi_turn": {
           "rating": 1350,
-          "votes": 7752,
+          "votes": 7747,
           "variant": "o4-mini-2025-04-16"
         }
       }
@@ -857,32 +857,32 @@
       "quality": {
         "overall": {
           "rating": 1458,
-          "votes": 125379,
+          "votes": 125384,
           "variant": "gemini-2.5-pro"
         },
         "coding": {
           "rating": 1452,
-          "votes": 26960,
+          "votes": 26959,
           "variant": "gemini-2.5-pro"
         },
         "hard_prompts": {
           "rating": 1455,
-          "votes": 65924,
+          "votes": 65936,
           "variant": "gemini-2.5-pro"
         },
         "instruction_following": {
-          "rating": 1437,
-          "votes": 35231,
+          "rating": 1436,
+          "votes": 35230,
           "variant": "gemini-2.5-pro"
         },
         "longer_query": {
           "rating": 1449,
-          "votes": 34044,
+          "votes": 34037,
           "variant": "gemini-2.5-pro"
         },
         "multi_turn": {
           "rating": 1453,
-          "votes": 21196,
+          "votes": 21203,
           "variant": "gemini-2.5-pro"
         }
       }
@@ -915,32 +915,32 @@
       "quality": {
         "overall": {
           "rating": 1435,
-          "votes": 35892,
+          "votes": 35845,
           "variant": "gemini-3.5-flash-lite"
         },
         "coding": {
           "rating": 1453,
-          "votes": 9923,
+          "votes": 9919,
           "variant": "gemini-3.5-flash-lite"
         },
         "hard_prompts": {
-          "rating": 1441,
-          "votes": 23826,
+          "rating": 1440,
+          "votes": 23804,
           "variant": "gemini-3.5-flash-lite"
         },
         "instruction_following": {
-          "rating": 1420,
-          "votes": 12918,
+          "rating": 1419,
+          "votes": 12900,
           "variant": "gemini-3.5-flash-lite"
         },
         "longer_query": {
           "rating": 1435,
-          "votes": 17145,
+          "votes": 17107,
           "variant": "gemini-3.5-flash-lite"
         },
         "multi_turn": {
-          "rating": 1445,
-          "votes": 5861,
+          "rating": 1444,
+          "votes": 5869,
           "variant": "gemini-3.5-flash-lite"
         }
       }
@@ -973,33 +973,91 @@
       "quality": {
         "overall": {
           "rating": 1499,
-          "votes": 31437,
+          "votes": 35670,
           "variant": "gemini-3.8-flash-high"
         },
         "coding": {
-          "rating": 1510,
-          "votes": 8355,
+          "rating": 1507,
+          "votes": 9370,
           "variant": "gemini-3.8-flash-high"
         },
         "hard_prompts": {
           "rating": 1508,
-          "votes": 20342,
+          "votes": 23047,
           "variant": "gemini-3.8-flash-high"
         },
         "instruction_following": {
           "rating": 1490,
-          "votes": 11246,
+          "votes": 12758,
           "variant": "gemini-3.8-flash-high"
         },
         "longer_query": {
-          "rating": 1508,
-          "votes": 14609,
+          "rating": 1507,
+          "votes": 16476,
           "variant": "gemini-3.8-flash-high"
         },
         "multi_turn": {
-          "rating": 1501,
-          "votes": 4708,
+          "rating": 1500,
+          "votes": 5316,
           "variant": "gemini-3.8-flash-high"
+        }
+      }
+    },
+    {
+      "id": "gemini-4-argon",
+      "provider": "Google",
+      "name": "Gemini 4 Argon",
+      "inputPricePerMTokens": 2,
+      "outputPricePerMTokens": 10,
+      "contextWindow": 1048576,
+      "tier": "Google:argon",
+      "cachedInputPricePerMTokens": 0.1,
+      "maxOutputTokens": 65536,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf",
+        "audio",
+        "video"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching"
+      ],
+      "firstSeenAt": "2026-10-14",
+      "quality": {
+        "overall": {
+          "rating": 1533,
+          "votes": 4903,
+          "variant": "gemini-4-argon-high"
+        },
+        "coding": {
+          "rating": 1548,
+          "votes": 1226,
+          "variant": "gemini-4-argon-high"
+        },
+        "hard_prompts": {
+          "rating": 1547,
+          "votes": 3133,
+          "variant": "gemini-4-argon-high"
+        },
+        "instruction_following": {
+          "rating": 1537,
+          "votes": 1755,
+          "variant": "gemini-4-argon-high"
+        },
+        "longer_query": {
+          "rating": 1547,
+          "votes": 2064,
+          "variant": "gemini-4-argon-high"
+        },
+        "multi_turn": {
+          "rating": 1556,
+          "votes": 679,
+          "variant": "gemini-4-argon-high"
         }
       }
     },
@@ -1032,33 +1090,33 @@
       "firstSeenAt": null,
       "quality": {
         "overall": {
-          "rating": 1399,
-          "votes": 8780,
+          "rating": 1401,
+          "votes": 10768,
           "variant": "grok-4.7-xhigh"
         },
         "coding": {
-          "rating": 1427,
-          "votes": 1915,
+          "rating": 1429,
+          "votes": 2348,
           "variant": "grok-4.7-xhigh"
         },
         "hard_prompts": {
-          "rating": 1413,
-          "votes": 5319,
+          "rating": 1415,
+          "votes": 6568,
           "variant": "grok-4.7-xhigh"
         },
         "instruction_following": {
-          "rating": 1404,
-          "votes": 2963,
+          "rating": 1408,
+          "votes": 3570,
           "variant": "grok-4.7-xhigh"
         },
         "longer_query": {
-          "rating": 1413,
-          "votes": 3625,
+          "rating": 1415,
+          "votes": 4459,
           "variant": "grok-4.7-xhigh"
         },
         "multi_turn": {
-          "rating": 1393,
-          "votes": 1292,
+          "rating": 1392,
+          "votes": 1604,
           "variant": "grok-4.7-xhigh"
         }
       }
@@ -1219,32 +1277,32 @@
       "quality": {
         "overall": {
           "rating": 1421,
-          "votes": 11803,
+          "votes": 11793,
           "variant": "mistral-medium-3.5"
         },
         "coding": {
           "rating": 1461,
-          "votes": 3297,
+          "votes": 3298,
           "variant": "mistral-medium-3.5"
         },
         "hard_prompts": {
-          "rating": 1436,
-          "votes": 7666,
+          "rating": 1437,
+          "votes": 7661,
           "variant": "mistral-medium-3.5"
         },
         "instruction_following": {
-          "rating": 1414,
-          "votes": 3846,
+          "rating": 1415,
+          "votes": 3837,
           "variant": "mistral-medium-3.5"
         },
         "longer_query": {
-          "rating": 1415,
-          "votes": 5119,
+          "rating": 1416,
+          "votes": 5106,
           "variant": "mistral-medium-3.5"
         },
         "multi_turn": {
-          "rating": 1423,
-          "votes": 1921,
+          "rating": 1424,
+          "votes": 1918,
           "variant": "mistral-medium-3.5"
         }
       }
@@ -1296,32 +1354,32 @@
       "quality": {
         "overall": {
           "rating": 1432,
-          "votes": 52047,
+          "votes": 52016,
           "variant": "deepseek-v4-flash"
         },
         "coding": {
           "rating": 1457,
-          "votes": 15289,
+          "votes": 15290,
           "variant": "deepseek-v4-flash"
         },
         "hard_prompts": {
           "rating": 1444,
-          "votes": 34825,
+          "votes": 34789,
           "variant": "deepseek-v4-flash"
         },
         "instruction_following": {
           "rating": 1421,
-          "votes": 18012,
+          "votes": 17984,
           "variant": "deepseek-v4-flash"
         },
         "longer_query": {
           "rating": 1434,
-          "votes": 23403,
+          "votes": 23382,
           "variant": "deepseek-v4-flash"
         },
         "multi_turn": {
           "rating": 1449,
-          "votes": 9348,
+          "votes": 9349,
           "variant": "deepseek-v4-flash"
         }
       }
@@ -1350,32 +1408,32 @@
       "quality": {
         "overall": {
           "rating": 1451,
-          "votes": 57657,
+          "votes": 57614,
           "variant": "deepseek-v4-pro"
         },
         "coding": {
           "rating": 1469,
-          "votes": 17144,
+          "votes": 17145,
           "variant": "deepseek-v4-pro"
         },
         "hard_prompts": {
           "rating": 1461,
-          "votes": 38569,
+          "votes": 38529,
           "variant": "deepseek-v4-pro"
         },
         "instruction_following": {
           "rating": 1445,
-          "votes": 20069,
+          "votes": 20039,
           "variant": "deepseek-v4-pro"
         },
         "longer_query": {
-          "rating": 1457,
-          "votes": 25984,
+          "rating": 1458,
+          "votes": 25947,
           "variant": "deepseek-v4-pro"
         },
         "multi_turn": {
           "rating": 1467,
-          "votes": 10357,
+          "votes": 10358,
           "variant": "deepseek-v4-pro"
         }
       }
