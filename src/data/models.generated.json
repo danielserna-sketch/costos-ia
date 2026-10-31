@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T12:15:37.297Z",
+  "generatedAt": "2026-10-31T11:39:25.456Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
@@ -331,6 +331,37 @@
       "firstSeenAt": null
     },
     {
+      "id": "gpt-6-rosalind",
+      "provider": "OpenAI",
+      "name": "GPT-6 Rosalind",
+      "inputPricePerMTokens": 15,
+      "outputPricePerMTokens": 75,
+      "contextWindow": 922000,
+      "tier": "OpenAI:gpt-rosalind",
+      "cachedInputPricePerMTokens": 1.5,
+      "cacheWritePricePerMTokens": 18.75,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "longContextPricing": {
+        "thresholdTokens": 272000,
+        "inputPricePerMTokens": 30,
+        "outputPricePerMTokens": 112.5
+      },
+      "firstSeenAt": "2026-10-31"
+    },
+    {
       "id": "gpt-6.1-sol",
       "provider": "OpenAI",
       "name": "GPT-6.1 Sol",
@@ -559,7 +590,8 @@
         "structured",
         "reasoning",
         "web",
-        "caching"
+        "caching",
+        "computer"
       ],
       "firstSeenAt": null
     },
@@ -585,7 +617,8 @@
         "structured",
         "reasoning",
         "web",
-        "caching"
+        "caching",
+        "computer"
       ],
       "firstSeenAt": null
     },
@@ -611,7 +644,8 @@
         "structured",
         "reasoning",
         "web",
-        "caching"
+        "caching",
+        "computer"
       ],
       "firstSeenAt": "2026-10-14"
     },
