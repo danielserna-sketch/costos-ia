@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T11:39:25.456Z",
+  "generatedAt": "2026-11-03T13:35:55.828Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
@@ -795,11 +795,11 @@
       "id": "mistral-large-4-0",
       "provider": "Mistral",
       "name": "Mistral Large 4.0",
-      "inputPricePerMTokens": 1.36,
-      "outputPricePerMTokens": 4.18,
+      "inputPricePerMTokens": 0.7,
+      "outputPricePerMTokens": 2.1,
       "contextWindow": 1048576,
       "tier": "Mistral:mistral-large",
-      "cachedInputPricePerMTokens": 0.14,
+      "cachedInputPricePerMTokens": 0.07,
       "maxOutputTokens": 1048576,
       "inputModalities": [
         "text",
