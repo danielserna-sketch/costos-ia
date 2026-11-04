@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T13:35:55.828Z",
+  "generatedAt": "2026-11-04T13:44:59.020Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
@@ -566,6 +566,7 @@
         "inputPricePerMTokens": 2.5,
         "outputPricePerMTokens": 15
       },
+      "deprecationDate": "2026-12-01",
       "firstSeenAt": null
     },
     {
