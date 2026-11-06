@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T13:57:18.956Z",
+  "generatedAt": "2026-11-06T13:42:45.376Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
@@ -238,37 +238,6 @@
       "firstSeenAt": null
     },
     {
-      "id": "gpt-5.6-cyber",
-      "provider": "OpenAI",
-      "name": "GPT-5.6 Cyber",
-      "inputPricePerMTokens": 12.5,
-      "outputPricePerMTokens": 75,
-      "contextWindow": 272000,
-      "tier": "OpenAI:gpt-cyber",
-      "cachedInputPricePerMTokens": 1.25,
-      "cacheWritePricePerMTokens": 15.625,
-      "maxOutputTokens": 128000,
-      "inputModalities": [
-        "text",
-        "image",
-        "pdf"
-      ],
-      "capabilities": [
-        "tools",
-        "structured",
-        "reasoning",
-        "web",
-        "caching",
-        "computer"
-      ],
-      "longContextPricing": {
-        "thresholdTokens": 272000,
-        "inputPricePerMTokens": 25,
-        "outputPricePerMTokens": 112.5
-      },
-      "firstSeenAt": null
-    },
-    {
       "id": "gpt-6-astra",
       "provider": "OpenAI",
       "name": "GPT-6 Astra",
@@ -298,6 +267,32 @@
         "outputPricePerMTokens": 75
       },
       "firstSeenAt": null
+    },
+    {
+      "id": "gpt-6-cyber",
+      "provider": "OpenAI",
+      "name": "GPT-6 Cyber",
+      "inputPricePerMTokens": 20,
+      "outputPricePerMTokens": 100,
+      "contextWindow": 922000,
+      "tier": "OpenAI:gpt-cyber",
+      "cachedInputPricePerMTokens": 2,
+      "cacheWritePricePerMTokens": 25,
+      "maxOutputTokens": 128000,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": "2026-11-06"
     },
     {
       "id": "gpt-6-luna",
@@ -968,5 +963,15 @@
       }
     }
   ],
-  "changes": []
+  "changes": [
+    {
+      "provider": "OpenAI",
+      "oldName": "GPT-5.6 Cyber",
+      "newName": "GPT-6 Cyber",
+      "oldInputPricePerMTokens": 12.5,
+      "newInputPricePerMTokens": 20,
+      "oldOutputPricePerMTokens": 75,
+      "newOutputPricePerMTokens": 100
+    }
+  ]
 }
