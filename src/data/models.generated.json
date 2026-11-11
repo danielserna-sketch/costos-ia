@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T14:17:26.053Z",
+  "generatedAt": "2026-11-11T13:30:50.568Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
@@ -651,6 +651,33 @@
       "firstSeenAt": "2026-10-14"
     },
     {
+      "id": "gemini-4-carbon",
+      "provider": "Google",
+      "name": "Gemini 4 Carbon",
+      "inputPricePerMTokens": 2,
+      "outputPricePerMTokens": 10,
+      "contextWindow": 1048576,
+      "tier": "Google:carbon",
+      "cachedInputPricePerMTokens": 0.1,
+      "maxOutputTokens": 1048576,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf",
+        "audio",
+        "video"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": "2026-11-11"
+    },
+    {
       "id": "grok-4.7",
       "provider": "xAI",
       "name": "Grok 4.7",
@@ -969,24 +996,5 @@
       }
     }
   ],
-  "changes": [
-    {
-      "provider": "Anthropic",
-      "oldName": "Claude Fable 5.1",
-      "newName": "Claude Fable 5.2",
-      "oldInputPricePerMTokens": 10,
-      "newInputPricePerMTokens": 8,
-      "oldOutputPricePerMTokens": 50,
-      "newOutputPricePerMTokens": 40
-    },
-    {
-      "provider": "Anthropic",
-      "oldName": "Claude Mythos 5.1",
-      "newName": "Claude Mythos 5.2",
-      "oldInputPricePerMTokens": 10,
-      "newInputPricePerMTokens": 8,
-      "oldOutputPricePerMTokens": 50,
-      "newOutputPricePerMTokens": 40
-    }
-  ]
+  "changes": []
 }
