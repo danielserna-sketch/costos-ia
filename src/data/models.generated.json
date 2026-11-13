@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-11T13:30:50.568Z",
+  "generatedAt": "2026-11-13T13:53:38.172Z",
   "trackingSince": "2026-09-30",
   "quality": {
     "source": "LMArena (lmarena.ai) — CC BY 4.0",
-    "publishedAt": "2026-11-09"
+    "publishedAt": "2026-11-11"
   },
   "models": [
     {
@@ -450,32 +450,32 @@
       "quality": {
         "overall": {
           "rating": 1410,
-          "votes": 58811,
+          "votes": 58805,
           "variant": "o3 (2025-04-16)"
         },
         "coding": {
           "rating": 1407,
-          "votes": 11559,
+          "votes": 11556,
           "variant": "o3 (2025-04-16)"
         },
         "hard_prompts": {
           "rating": 1402,
-          "votes": 25479,
+          "votes": 25473,
           "variant": "o3 (2025-04-16)"
         },
         "instruction_following": {
           "rating": 1368,
-          "votes": 15479,
+          "votes": 15476,
           "variant": "o3 (2025-04-16)"
         },
         "longer_query": {
           "rating": 1372,
-          "votes": 11511,
+          "votes": 11512,
           "variant": "o3 (2025-04-16)"
         },
         "multi_turn": {
           "rating": 1405,
-          "votes": 9643,
+          "votes": 9642,
           "variant": "o3 (2025-04-16)"
         }
       }
@@ -507,27 +507,27 @@
       "quality": {
         "overall": {
           "rating": 1353,
-          "votes": 44801,
+          "votes": 44791,
           "variant": "o4-mini (2025-04-16)"
         },
         "coding": {
           "rating": 1368,
-          "votes": 8639,
+          "votes": 8634,
           "variant": "o4-mini (2025-04-16)"
         },
         "hard_prompts": {
           "rating": 1350,
-          "votes": 19358,
+          "votes": 19352,
           "variant": "o4-mini (2025-04-16)"
         },
         "instruction_following": {
           "rating": 1320,
-          "votes": 11871,
+          "votes": 11868,
           "variant": "o4-mini (2025-04-16)"
         },
         "longer_query": {
           "rating": 1314,
-          "votes": 8609,
+          "votes": 8611,
           "variant": "o4-mini (2025-04-16)"
         },
         "multi_turn": {
@@ -676,6 +676,33 @@
         "computer"
       ],
       "firstSeenAt": "2026-11-11"
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "provider": "Google",
+      "name": "Gemini 4 Hydrogen",
+      "inputPricePerMTokens": 1.5,
+      "outputPricePerMTokens": 7.5,
+      "contextWindow": 1048576,
+      "tier": "Google:hydrogen",
+      "cachedInputPricePerMTokens": 0.075,
+      "maxOutputTokens": 1048576,
+      "inputModalities": [
+        "text",
+        "image",
+        "pdf",
+        "audio",
+        "video"
+      ],
+      "capabilities": [
+        "tools",
+        "structured",
+        "reasoning",
+        "web",
+        "caching",
+        "computer"
+      ],
+      "firstSeenAt": "2026-11-13"
     },
     {
       "id": "grok-4.7",
@@ -911,32 +938,32 @@
       "quality": {
         "overall": {
           "rating": 1432,
-          "votes": 51368,
+          "votes": 51336,
           "variant": "DeepSeek-V4-Flash"
         },
         "coding": {
-          "rating": 1456,
-          "votes": 15135,
+          "rating": 1457,
+          "votes": 15115,
           "variant": "DeepSeek-V4-Flash"
         },
         "hard_prompts": {
           "rating": 1443,
-          "votes": 34315,
+          "votes": 34299,
           "variant": "DeepSeek-V4-Flash"
         },
         "instruction_following": {
           "rating": 1421,
-          "votes": 17710,
+          "votes": 17708,
           "variant": "DeepSeek-V4-Flash"
         },
         "longer_query": {
           "rating": 1435,
-          "votes": 22999,
+          "votes": 22987,
           "variant": "DeepSeek-V4-Flash"
         },
         "multi_turn": {
           "rating": 1449,
-          "votes": 9278,
+          "votes": 9267,
           "variant": "DeepSeek-V4-Flash"
         }
       }
@@ -965,32 +992,32 @@
       "quality": {
         "overall": {
           "rating": 1451,
-          "votes": 56906,
+          "votes": 56857,
           "variant": "DeepSeek-V4-Pro"
         },
         "coding": {
           "rating": 1469,
-          "votes": 16930,
+          "votes": 16916,
           "variant": "DeepSeek-V4-Pro"
         },
         "hard_prompts": {
-          "rating": 1462,
-          "votes": 38011,
+          "rating": 1461,
+          "votes": 37984,
           "variant": "DeepSeek-V4-Pro"
         },
         "instruction_following": {
           "rating": 1446,
-          "votes": 19767,
+          "votes": 19746,
           "variant": "DeepSeek-V4-Pro"
         },
         "longer_query": {
           "rating": 1458,
-          "votes": 25531,
+          "votes": 25506,
           "variant": "DeepSeek-V4-Pro"
         },
         "multi_turn": {
           "rating": 1467,
-          "votes": 10267,
+          "votes": 10255,
           "variant": "DeepSeek-V4-Pro"
         }
       }
